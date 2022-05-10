@@ -1,0 +1,6 @@
+.searchbar{
+    -fx-background-radius: 999px;
+    -fx-border-radius: 999px;
+    -fx-border-color: #404040;
+    -fx-border-width: 2px;
+}
