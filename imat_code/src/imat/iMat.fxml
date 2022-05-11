@@ -96,7 +96,7 @@
                   </Pane>
                   <Pane layoutX="237.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <children>
-                        <ImageView fitHeight="102.0" fitWidth="164.0" layoutX="38.0" layoutY="-11.0" pickOnBounds="true">
+                        <ImageView fitHeight="102.0" fitWidth="150.0" layoutX="45.0" layoutY="-11.0" pickOnBounds="true">
                            <image>
                               <Image url="@resources/imgs/banana.png" />
                            </image>
@@ -113,6 +113,11 @@
                   </Pane>
                   <Pane layoutX="477.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <children>
+                        <ImageView fitHeight="60.0" fitWidth="121.0" layoutX="60.0" layoutY="10.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@resources/imgs/Salmon.png" />
+                           </image>
+                        </ImageView>
                         <Label fx:id="meatLabel" layoutX="38.0" layoutY="19.0" onMouseEntered="#mouseEnteredMeatButton" onMouseExited="#mouseExitedMeatButton" styleClass="categoryButtonTxt" text="Kött &amp; Fisk" textAlignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -122,6 +127,11 @@
                   </Pane>
                   <Pane layoutX="717.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <children>
+                        <ImageView fitHeight="60.0" fitWidth="107.0" layoutX="66.0" layoutY="10.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@resources/imgs/butter.png" />
+                           </image>
+                        </ImageView>
                         <Label fx:id="dairyLabel" layoutX="73.0" layoutY="19.0" onMouseEntered="#mouseEnteredDairyButton" onMouseExited="#mouseExitedDairyButton" styleClass="categoryButtonTxt" text="Mejeri" textAlignment="CENTER">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -131,6 +141,11 @@
                   </Pane>
                   <Pane layoutX="957.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <children>
+                        <ImageView fitHeight="69.0" fitWidth="80.0" layoutX="82.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/imgs/honey.png" />
+                           </image>
+                        </ImageView>
                         <Label fx:id="pantryLabel" layoutX="65.0" layoutY="19.0" onMouseEntered="#mouseEnteredPantryButton" onMouseExited="#mouseExitedPantryButton" styleClass="categoryButtonTxt" text="Skafferi">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -140,6 +155,11 @@
                   </Pane>
                   <Pane layoutX="1197.0" prefHeight="81.0" prefWidth="241.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <children>
+                        <ImageView fitHeight="80.0" fitWidth="104.0" layoutX="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/imgs/juice.png" />
+                           </image>
+                        </ImageView>
                         <Label fx:id="drinksLabel" layoutX="76.0" layoutY="19.0" onMouseEntered="#mouseEnteredDrinkButton" onMouseExited="#mouseExitedDrinkButton" styleClass="categoryButtonTxt" text="Dryck">
                            <cursor>
                               <Cursor fx:constant="HAND" />
