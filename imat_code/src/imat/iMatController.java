@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 
 public class iMatController implements Initializable {
 
-    imat.iMatBackendController iMatBackendController = new iMatBackendController();
+    iMatBackendController iMatBackendController = new iMatBackendController();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

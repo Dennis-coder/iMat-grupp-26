@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -22,11 +24,16 @@
                         </Label>
                         <Pane layoutX="560.0" layoutY="10.0" prefHeight="40.0" prefWidth="300.0" styleClass="searchbar">
                            <children>
-                              <TextField prefHeight="40.0" prefWidth="300.0" styleClass="searchbar">
+                              <TextField prefHeight="40.0" prefWidth="300.0" promptText="Sök efter varor, kategorier..." styleClass="searchbar">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </TextField>
+                              <ImageView fitHeight="35.0" fitWidth="31.0" layoutX="255.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../resources/imat/images/search_icon.png.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                         <Pane layoutX="1100.0" layoutY="10.0" prefHeight="40.0" prefWidth="120.0" styleClass="searchbar">
