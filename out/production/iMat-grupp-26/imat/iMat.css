@@ -1,0 +1,17 @@
+.searchbar{
+    -fx-background-radius: 999px;
+    -fx-border-radius: 999px;
+    -fx-border-color: #404040;
+    -fx-border-width: 2px;
+}
+
+.categoryButton{
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+}
+
+.categoryButtonTxt{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-font-size: 36;
+}
+
