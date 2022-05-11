@@ -17,6 +17,29 @@
    <children>
       <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <AnchorPane fx:id="shoppingCart" onMouseClicked="#toHomepage" prefHeight="786.0" prefWidth="1440.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
+               <children>
+                  <AnchorPane layoutX="145.0" layoutY="51.0" prefHeight="389.0" prefWidth="1045.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@resources/imgs/shopping_cart.png" />
+                           </image>
+                        </ImageView>
+                        <Button layoutX="1110.0" layoutY="29.0" mnemonicParsing="false" onAction="#toHomepage" prefHeight="48.0" prefWidth="48.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@resources/imgs/close.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <TextArea layoutX="12.0" layoutY="150.0" prefHeight="290.0" prefWidth="484.0" text="Äpple x 2    15 kr" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
             <AnchorPane fx:id="accountDetail" onMouseClicked="#toHomepage" prefHeight="786.0" prefWidth="1440.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
                <children>
                   <AnchorPane layoutX="145.0" layoutY="51.0" prefHeight="389.0" prefWidth="1045.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
@@ -40,7 +63,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="home" style="-fx-background-color: white;">
+            <AnchorPane fx:id="home" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <Pane>
                      <children>
@@ -140,6 +163,11 @@
                               </Pane>
                               <Pane layoutX="477.0" layoutY="11.0" prefHeight="81.0" prefWidth="240.0" styleClass="navButton">
                                  <children>
+                                    <ImageView fitHeight="61.0" fitWidth="164.0" layoutX="38.0" layoutY="10.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@resources/imgs/Salmon.png" />
+                                       </image>
+                                    </ImageView>
                                     <Label fx:id="meatLabel" layoutX="38.0" layoutY="19.0" onMouseEntered="#mouseEnteredMeatButton" onMouseExited="#mouseExitedMeatButton" styleClass="navButtonTxt" text="Kött &amp; Fisk" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -149,6 +177,11 @@
                               </Pane>
                               <Pane layoutX="717.0" layoutY="11.0" prefHeight="81.0" prefWidth="240.0" styleClass="navButton">
                                  <children>
+                                    <ImageView fitHeight="61.0" fitWidth="143.0" layoutX="50.0" layoutY="11.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@resources/imgs/butter.png" />
+                                       </image>
+                                    </ImageView>
                                     <Label fx:id="dairyLabel" layoutX="73.0" layoutY="19.0" onMouseEntered="#mouseEnteredDairyButton" onMouseExited="#mouseExitedDairyButton" styleClass="navButtonTxt" text="Mejeri" textAlignment="CENTER">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -158,7 +191,12 @@
                               </Pane>
                               <Pane layoutX="957.0" layoutY="11.0" prefHeight="81.0" prefWidth="240.0" styleClass="navButton">
                                  <children>
-                                    <Label fx:id="pantryLabel" layoutX="65.0" layoutY="19.0" onMouseEntered="#mouseEnteredPantryButton" onMouseExited="#mouseExitedPantryButton" styleClass="navButtonTxt" text="Skafferi">
+                                    <ImageView fitHeight="61.0" fitWidth="164.0" layoutX="39.0" layoutY="10.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@resources/imgs/honey.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="pantryLabel" layoutX="63.0" layoutY="20.0" onMouseEntered="#mouseEnteredPantryButton" onMouseExited="#mouseExitedPantryButton" styleClass="navButtonTxt" text="Skafferi">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -167,6 +205,11 @@
                               </Pane>
                               <Pane layoutX="1197.0" layoutY="11.0" prefHeight="81.0" prefWidth="241.0" styleClass="navButton">
                                  <children>
+                                    <ImageView fitHeight="61.0" fitWidth="164.0" layoutX="38.0" layoutY="10.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@resources/imgs/juice.png" />
+                                       </image>
+                                    </ImageView>
                                     <Label fx:id="drinksLabel" layoutX="76.0" layoutY="19.0" onMouseEntered="#mouseEnteredDrinkButton" onMouseExited="#mouseExitedDrinkButton" styleClass="navButtonTxt" text="Dryck">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -178,138 +221,16 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane layoutY="160.0" AnchorPane.bottomAnchor="460.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="160.0">
-                     <children>
-                        <Label fx:id="startLabel" layoutX="83.0" layoutY="19.0" onMouseEntered="#mouseEnteredStartButton" onMouseExited="#mouseExitedStartButton" prefHeight="42.0" prefWidth="72.0" styleClass="categoryButtonTxt" text="Start" textAlignment="CENTER">
-                           <font>
-                              <Font name="Baskerville Old Face" size="36.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Pane>
-                  <Pane layoutX="237.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="102.0" fitWidth="150.0" layoutX="45.0" layoutY="-11.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@resources/imgs/banana.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="fruitLabel" layoutX="17.0" layoutY="19.0" onMouseEntered="#mouseEnteredFruitButton" onMouseExited="#mouseExitedFruitButton" styleClass="categoryButtonTxt" text="Frukt &amp; Grönt" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </Pane>
-                  <Pane layoutX="477.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="121.0" layoutX="60.0" layoutY="10.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@resources/imgs/Salmon.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="meatLabel" layoutX="38.0" layoutY="19.0" onMouseEntered="#mouseEnteredMeatButton" onMouseExited="#mouseExitedMeatButton" styleClass="categoryButtonTxt" text="Kött &amp; Fisk" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="717.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="107.0" layoutX="66.0" layoutY="10.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@resources/imgs/butter.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="dairyLabel" layoutX="73.0" layoutY="19.0" onMouseEntered="#mouseEnteredDairyButton" onMouseExited="#mouseExitedDairyButton" styleClass="categoryButtonTxt" text="Mejeri" textAlignment="CENTER">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="957.0" layoutY="60.0" prefHeight="81.0" prefWidth="240.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="69.0" fitWidth="80.0" layoutX="82.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@resources/imgs/honey.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="pantryLabel" layoutX="65.0" layoutY="19.0" onMouseEntered="#mouseEnteredPantryButton" onMouseExited="#mouseExitedPantryButton" styleClass="categoryButtonTxt" text="Skafferi">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="1197.0" prefHeight="81.0" prefWidth="241.0" styleClass="categoryButton" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="80.0" fitWidth="104.0" layoutX="69.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@resources/imgs/juice.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="drinksLabel" layoutX="76.0" layoutY="19.0" onMouseEntered="#mouseEnteredDrinkButton" onMouseExited="#mouseExitedDrinkButton" styleClass="categoryButtonTxt" text="Dryck">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
-            <StackPane>
-               <children>
-                  <AnchorPane fx:id="recipeDetailPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
-                     <children>
-                        <Label layoutX="31.0" layoutY="24.0" text="Favoriter">
-                           <font>
-                              <Font name="Baskerville Old Face" size="30.0" />
-                           </font>
-                        </Label>
-                        <ImageView fitHeight="29.0" fitWidth="35.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@resources/imgs/heart.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="shoppingCart" onMouseClicked="#toHomepage" prefHeight="786.0" prefWidth="1440.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
-               <children>
-                  <AnchorPane layoutX="145.0" layoutY="51.0" prefHeight="389.0" prefWidth="1045.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@resources/imgs/shopping_cart.png" />
-                           </image>
-                        </ImageView>
-                        <Button layoutX="1110.0" layoutY="29.0" mnemonicParsing="false" onAction="#toHomepage" prefHeight="48.0" prefWidth="48.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@resources/imgs/close.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <TextArea layoutX="12.0" layoutY="150.0" prefHeight="290.0" prefWidth="484.0" text="Äpple x 2    15 kr" />
-                     </children>
-                  </AnchorPane>
+                  <Label layoutX="31.0" layoutY="160.0" text="Favoriter">
+                     <font>
+                        <Font name="Baskerville Old Face" size="30.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="29.0" fitWidth="35.0" layoutX="150.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/imgs/heart.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
