@@ -1,3 +1,7 @@
+.top-left-logo{
+    -fx-background-color: #00000000;
+}
+
 .searchbar{
     -fx-background-radius: 999px;
     -fx-border-radius: 999px;
@@ -5,12 +9,33 @@
     -fx-border-width: 2px;
 }
 
-.categoryButton{
+.search-button{
+    -fx-background-radius: 0 999px 999px 0;
+    -fx-background-color: #00000000;
+}
+
+.search-button:hover{
+    -fx-background-color: #c0c0c0;
+}
+
+.imatButton{
+    -fx-background-radius: 999px;
+    -fx-border-radius: 999px;
+    -fx-border-color: #404040;
+    -fx-border-width: 2px;
+    -fx-background-color: #f0f0f0;
+}
+
+.imatButton:hover{
+    -fx-background-color: #c0c0c0;
+}
+
+.navButton{
     -fx-border-color: black;
     -fx-border-width: 2px;
 }
 
-.categoryButtonTxt{
+.navButtonTxt{
     -fx-font-family: "Baskerville Old Face";
     -fx-font-size: 36;
 }

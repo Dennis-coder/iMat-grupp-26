@@ -20,9 +20,11 @@ public class iMatController implements Initializable {
 
     iMatBackendController iMatBackendController = new iMatBackendController();
     @FXML
-    AnchorPane accountDetailPane;
+    AnchorPane accountDetail;
     @FXML
-    AnchorPane recipeDetailPane;
+    AnchorPane home;
+    @FXML
+    AnchorPane shoppingCart;
     @FXML
     Label startLabel;
     @FXML
@@ -42,13 +44,18 @@ public class iMatController implements Initializable {
     }
 
     @FXML
-    public void openKontoView(){
-        accountDetailPane.toFront();
+    public void toAccount(){
+        accountDetail.toFront();
     }
 
     @FXML
     public void toHomepage(){
-        recipeDetailPane.toFront();
+        home.toFront();
+    }
+
+    @FXML
+    public void toShoppingCart(){
+        shoppingCart.toFront();
     }
 
     public void mouseEnteredCategoryButton(Label label){
