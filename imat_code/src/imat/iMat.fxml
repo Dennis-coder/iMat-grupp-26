@@ -231,6 +231,7 @@
                         <Image url="@resources/imgs/heart.png" />
                      </image>
                   </ImageView>
+                  <AnchorPane fx:id="productScreen" layoutX="234.0" layoutY="160.0" prefHeight="500.0" prefWidth="500.0" />
                </children>
             </AnchorPane>
          </children>

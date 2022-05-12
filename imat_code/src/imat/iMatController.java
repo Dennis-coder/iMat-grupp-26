@@ -2,23 +2,24 @@
 package imat;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import se.chalmers.cse.dat216.project.IMatDataHandler;
+import se.chalmers.cse.dat216.project.Product;
 
 
 public class iMatController implements Initializable {
 
     iMatBackendController iMatBackendController = new iMatBackendController();
+    private Map<Integer, productDisplayItem> productDisplayMap = new HashMap<Integer, productDisplayItem>();
     @FXML
     AnchorPane accountDetail;
     @FXML
@@ -37,11 +38,20 @@ public class iMatController implements Initializable {
     Label pantryLabel;
     @FXML
     Label drinksLabel;
+    @FXML
+    AnchorPane productScreen;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        IMatDataHandler db = IMatDataHandler.getInstance();
+        for(Product product : db.getProducts()){
+            productDisplayItem dispItem = new productDisplayItem(product, this);
+            productDisplayMap.put(product.getProductId(), dispItem);
+        }
+        populateProductScreen();
     }
+
+
 
     @FXML
     public void toAccount(){
@@ -127,6 +137,11 @@ public class iMatController implements Initializable {
     @FXML
     public void mouseExitedDrinkButton(){
         mouseExitedCategoryButton(drinksLabel);
+    }
+
+    @FXML
+    public void populateProductScreen(){
+        productScreen.getChildren().add(productDisplayMap.get(1));
     }
 
 
