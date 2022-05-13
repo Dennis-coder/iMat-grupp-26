@@ -2,6 +2,7 @@ package imat;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
@@ -61,10 +62,6 @@ public class productDisplayItem extends AnchorPane {
     }
 
     private void initializeComboBox() {
-        /*if ((product.getUnit() == "kr/kg") || product.getUnit() == "kr/l"){  kan lägga till om vi vill ha olika
-        alternativ för lösvikt
-            amountSelect.getItems().addAll("100g", "200g", "3",)
-        }*/
         amountSelect.getItems().addAll("1", "2", "3", "4", "5", "6");
         amountSelect.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
@@ -78,6 +75,11 @@ public class productDisplayItem extends AnchorPane {
 
     private void setPicture(){
         picture.setImage(db.getFXImage(product, 220, 180));
+    }
+
+    @FXML
+    public void onClick(Event event){
+        parentController.openProductViewScreen(product);
     }
 
 
