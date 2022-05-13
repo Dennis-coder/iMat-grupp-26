@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -49,21 +50,9 @@ public class iMatController implements Initializable {
     @FXML
     AnchorPane productViewScreen;
     @FXML
-    Label viewScreenPriceOne;
-    @FXML
-    Label viewScreenPriceTwo;
-    @FXML
-    Label viewScreenPriceUnit;
-    @FXML
-    Label viewScreenUnit;
-    @FXML
-    Label viewScreenTitle;
-    @FXML
-    ImageView viewScreenPicture;
-    @FXML
-    ImageView viewScreenEkoPicture;
-    @FXML
     ComboBox viewScreenAmountSelect;
+    @FXML
+    FlowPane productViewHolder;
 
 
     @Override
@@ -170,36 +159,17 @@ public class iMatController implements Initializable {
         }
     }
 
-    public void populateProductViewScreen(Product product){
-        viewScreenPicture.setImage(db.getFXImage(product, 400, 300));
-        viewScreenPriceOne.setText(String.valueOf(product.getPrice()) + ":-");
-        viewScreenPriceTwo.setText(String.valueOf(product.getPrice()) + "kr");
-        viewScreenTitle.setText(product.getName());
-        viewScreenUnit.setText(product.getUnit());
-        viewScreenPriceUnit.setText(String.valueOf(product.getPrice()) + " " + product.getUnit());
-        initializeComboBox(product);
-        if(product.isEcological()){
-            viewScreenEkoPicture.setVisible(true);
-        }
-    }
+
 
     public void openProductViewScreen(Product product){
-        populateProductViewScreen(product);
+        productView productView = new productView(product, this);
+        productViewHolder.getChildren().add(productView);
         productViewScreen.toFront();
     }
 
-    private void initializeComboBox(Product product) {
-        viewScreenAmountSelect.getItems().addAll("1", "2", "3", "4", "5", "6");
-        viewScreenAmountSelect.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                int currentVal = Integer.valueOf(newValue);
-                viewScreenPriceTwo.setText(String.valueOf(product.getPrice() * currentVal) + ":-");
-            }
-        });
+    public void closeProductViewScreen(){
+        productViewHolder.getChildren().clear();
+        home.toFront();
     }
-
-
 
 }
