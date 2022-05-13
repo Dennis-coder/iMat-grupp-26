@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.ProductDisplayItem">
+   <children>
+      <ImageView fitHeight="180.0" fitWidth="180.0" layoutX="74.0" layoutY="10.0" pickOnBounds="true" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="73.33333333333331" AnchorPane.topAnchor="10.0">
+         <image>
+            <Image url="@../../../resources/imat/images/product_88.jpg" />
+         </image>
+      </ImageView>
+      <Circle fill="#ff1f1f" layoutX="35.0" layoutY="35.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="9.0" layoutY="21.0" prefHeight="17.0" prefWidth="51.0" text="99:-" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="213.0" prefHeight="35.0" prefWidth="180.0" text="Titel">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="203.0" prefHeight="17.0" prefWidth="69.0" text="Märke" textFill="#000000bf">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="239.0" prefHeight="17.0" prefWidth="58.0" style="-fx-text-fill: #000000bf;" text="Vikt">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="258.0" layoutY="240.0" style="-fx-text-fill: #000000bf;" text="Land">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="10.0" layoutY="286.0" prefHeight="35.0" prefWidth="107.0" text="Pris">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="258.0" layoutY="294.0" prefHeight="20.0" prefWidth="69.0" text="Pris/kg">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="261.0" layoutY="335.0" mnemonicParsing="false" text="+">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
