@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import se.chalmers.cse.dat216.project.IMatDataHandler;
 import se.chalmers.cse.dat216.project.Product;
@@ -19,6 +20,7 @@ import se.chalmers.cse.dat216.project.Product;
 public class iMatController implements Initializable {
 
     iMatBackendController iMatBackendController = new iMatBackendController();
+    IMatDataHandler db = IMatDataHandler.getInstance();
     private Map<Integer, productDisplayItem> productDisplayMap = new HashMap<Integer, productDisplayItem>();
     @FXML
     AnchorPane accountDetail;
@@ -39,11 +41,10 @@ public class iMatController implements Initializable {
     @FXML
     Label drinksLabel;
     @FXML
-    AnchorPane productScreen;
+    FlowPane productScreen;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        IMatDataHandler db = IMatDataHandler.getInstance();
         for(Product product : db.getProducts()){
             productDisplayItem dispItem = new productDisplayItem(product, this);
             productDisplayMap.put(product.getProductId(), dispItem);
@@ -141,7 +142,9 @@ public class iMatController implements Initializable {
 
     @FXML
     public void populateProductScreen(){
-        productScreen.getChildren().add(productDisplayMap.get(1));
+        for(Product p : db.getProducts()){
+            productScreen.getChildren().add(productDisplayMap.get(p.getProductId()));
+        }
     }
 
 

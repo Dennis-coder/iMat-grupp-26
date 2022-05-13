@@ -26,7 +26,6 @@ public class iMat extends Application {
         Dimension launchSize = getLaunchSize();
 
         Scene scene = new Scene(root, launchSize.width, launchSize.height);
-        
         stage.setTitle(bundle.getString("application.name"));
         stage.setScene(scene);
         stage.show();
