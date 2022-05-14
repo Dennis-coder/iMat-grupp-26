@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import se.chalmers.cse.dat216.project.IMatDataHandler;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,6 +33,12 @@ public class iMat extends Application {
 
     }
 
+    @Override
+    public void stop(){
+        IMatDataHandler db = IMatDataHandler.getInstance();
+        db.shutDown();
+    }
+
     private Dimension getLaunchSize(){
         Dimension launchSize = new Dimension(1440, 786);
 
@@ -42,7 +49,7 @@ public class iMat extends Application {
         }
 
         if (screenSize.height < 786){
-            launchSize.height = screenSize.height;
+            launchSize.height = screenSize.height - 50;
         }
 
         return launchSize;

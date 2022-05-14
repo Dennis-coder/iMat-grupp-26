@@ -1,5 +1,6 @@
 package imat;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 public class shoppingCartScreen extends AnchorPane {
     iMatController parentController;
+    private static shoppingCartScreen Instance = null;
     IMatDataHandler db = IMatDataHandler.getInstance();
     @FXML
     AnchorPane clearCartConfirmationScreen;
@@ -22,6 +24,10 @@ public class shoppingCartScreen extends AnchorPane {
     Label totalPriceLabel;
     @FXML
     FlowPane itemsFlowPane;
+    @FXML
+    FlowPane itemInCartView;
+    @FXML
+    AnchorPane singltemAnchorPane;
 
     public shoppingCartScreen(iMatController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/shoppingCartScreen.fxml"));
@@ -36,6 +42,13 @@ public class shoppingCartScreen extends AnchorPane {
         this.parentController = controller;
 
         init();
+    }
+
+    public static shoppingCartScreen getInstance(iMatController parentController) {
+        if (Instance == null) {
+            Instance = new shoppingCartScreen(parentController);
+        }
+        return Instance;
     }
 
     private void init() {
@@ -90,7 +103,19 @@ public class shoppingCartScreen extends AnchorPane {
     }
 
     @FXML
+    public void closeItemInCartView(){
+        singltemAnchorPane.toBack();
+    }
+
+    @FXML
+    public void mouseTrap(Event event){
+        event.consume();
+    }
+
+    @FXML
     public void closeScreen(){
         parentController.closeShoppingCartScreen();
     }
+
+
 }

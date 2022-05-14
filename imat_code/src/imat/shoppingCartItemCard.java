@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import se.chalmers.cse.dat216.project.IMatDataHandler;
 import se.chalmers.cse.dat216.project.Product;
@@ -29,12 +30,17 @@ public class shoppingCartItemCard extends AnchorPane {
     Circle circleMinus;
     @FXML
     AnchorPane removePromptPane;
+    @FXML
+    Pane pictureLightPane;
+    @FXML
+    ImageView cross;
 
     iMatController parentController;
     Product product;
     IMatDataHandler db = IMatDataHandler.getInstance();
     DoubleProperty scalePlus = new SimpleDoubleProperty(1);
     DoubleProperty scaleMinus = new SimpleDoubleProperty(1);
+    DoubleProperty scaleCross = new SimpleDoubleProperty(1);
 
 
     public shoppingCartItemCard(Product p, iMatController controller){
@@ -59,14 +65,17 @@ public class shoppingCartItemCard extends AnchorPane {
         if(product.isEcological()){
             ekoImg.setVisible(true);
         }
-        bindCircles();
+        bindScales();
     }
 
-    private void bindCircles(){
+    private void bindScales(){
         circlePlus.scaleXProperty().bind(scalePlus);
         circlePlus.scaleYProperty().bind(scalePlus);
         circleMinus.scaleXProperty().bind(scaleMinus);
         circleMinus.scaleYProperty().bind(scaleMinus);
+        cross.scaleXProperty().bind(scaleCross);
+        cross.scaleYProperty().bind(scaleCross);
+
     }
 
     @FXML
@@ -80,6 +89,11 @@ public class shoppingCartItemCard extends AnchorPane {
     }
 
     @FXML
+    public void onHoverCross(){
+        scaleCross.setValue(1.1);
+    }
+
+    @FXML
     public void hoverExitedPlus(){
         scalePlus.setValue(1);
     }
@@ -87,6 +101,11 @@ public class shoppingCartItemCard extends AnchorPane {
     @FXML
     public void hoverExitedMinus(){
         scaleMinus.setValue(1);
+    }
+
+    @FXML
+    public void hoverExitedCross(){
+        scaleCross.setValue(1);
     }
 
     @FXML
@@ -120,16 +139,40 @@ public class shoppingCartItemCard extends AnchorPane {
     @FXML
     public void removePrompt(){
         removePromptPane.setVisible(true);
+        removePromptPane.toFront();
     }
 
     @FXML
     public void confirmRemoval(){
         removePromptPane.setVisible(false);
+        removePromptPane.toBack();
         parentController.removeItemFromCart(product);
     }
 
     @FXML
     public void cancelRemoval(){
         removePromptPane.setVisible(false);
+        removePromptPane.toBack();
+    }
+
+    @FXML
+    public void onHoverClickableArea(){
+        pictureLightPane.setVisible(true);
+        title.setUnderline(true);
+    }
+
+    @FXML
+    public void hoverStoppedClickableArea(){
+        pictureLightPane.setVisible(false);
+        title.setUnderline(false);
+    }
+
+    @FXML
+    public void onClickProduct(){
+        shoppingCartScreen screenSC = shoppingCartScreen.getInstance(parentController);
+        screenSC.itemInCartView.getChildren().clear();
+        screenSC.itemInCartView.getChildren().add(
+                new productView(product, Integer.parseInt(amount.getText()), parentController));
+        screenSC.singltemAnchorPane.toFront();
     }
 }

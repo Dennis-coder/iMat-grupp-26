@@ -13,6 +13,15 @@
 
 <fx:root prefHeight="620.0" prefWidth="1020.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <AnchorPane fx:id="singltemAnchorPane" onMouseClicked="#closeItemInCartView" prefHeight="620.0" prefWidth="1020.0" style="-fx-background-color: rgba(0, 0, 0, 0.5);">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" layoutX="200.0" onMouseClicked="#mouseTrap" prefHeight="500.0" prefWidth="620.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="198.0" AnchorPane.topAnchor="60.0">
+               <content>
+                  <FlowPane fx:id="itemInCartView" prefHeight="700.0" prefWidth="600.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="clearCartConfirmationScreen" prefHeight="620.0" prefWidth="1020.0" style="-fx-background-color: rgba(0, 0, 0.75) rgba(0, 0, 0, 0.75);">
          <children>
             <AnchorPane layoutX="287.0" layoutY="141.0" prefHeight="337.0" prefWidth="446.0" style="-fx-background-color: white;">
@@ -31,6 +40,22 @@
                   <Button layoutX="124.0" layoutY="188.0" mnemonicParsing="false" onAction="#backToCartScreen" text="Ångra" />
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+    <AnchorPane layoutX="459.0" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="575.0">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="620.0" prefWidth="575.0" vbarPolicy="ALWAYS">
+               <content>
+                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="560.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="560.0" text="Dina Varor" textAlignment="CENTER">
+                           <font>
+                              <Font name="Franklin Gothic Demi Cond" size="30.0" />
+                           </font>
+                        </Label>
+                     </children></FlowPane>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="620.0" prefWidth="460.0" style="-fx-background-color: white;">
@@ -66,22 +91,6 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-    <AnchorPane layoutX="459.0" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="575.0">
-         <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="620.0" prefWidth="575.0" vbarPolicy="ALWAYS">
-               <content>
-                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="560.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="560.0" text="Dina Varor" textAlignment="CENTER">
-                           <font>
-                              <Font name="Franklin Gothic Demi Cond" size="30.0" />
-                           </font>
-                        </Label>
-                     </children></FlowPane>
-               </content>
-            </ScrollPane>
          </children>
       </AnchorPane>
    </children>

@@ -46,7 +46,7 @@
             <Font name="Constantia" size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="viewScreenEkoPicture" fitHeight="68.0" fitWidth="110.0" layoutX="402.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewScreenEkoPicture" fitHeight="68.0" fitWidth="110.0" layoutX="402.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../resources/imgs/eko.jpg" />
          </image>

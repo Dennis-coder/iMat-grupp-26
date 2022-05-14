@@ -77,6 +77,9 @@ public class iMatController implements Initializable {
         }
         populateProductScreen();
         db.getShoppingCart().addShoppingCartListener(scl);
+        if (db.getShoppingCart().getItems().size() != 0){
+            db.getShoppingCart().fireShoppingCartChanged(db.getShoppingCart().getItems().get(1), false);
+        }
     }
 
     @FXML
@@ -91,7 +94,9 @@ public class iMatController implements Initializable {
 
     @FXML
     public void toShoppingCart(){
-        shoppingCartHolder.getChildren().add(new shoppingCartScreen(this));
+        if(shoppingCartHolder.getChildren().isEmpty()){
+            shoppingCartHolder.getChildren().add(shoppingCartScreen.getInstance(this));
+        }
         shoppingCart.toFront();
     }
 
@@ -182,10 +187,15 @@ public class iMatController implements Initializable {
     }
 
     public void closeProductViewScreen(){
-        productViewHolder.getChildren().clear();
-        home.toFront();
-    }
+        if (shoppingCartHolder.getChildren().isEmpty()){
+            productViewHolder.getChildren().clear();
+            home.toFront();
+        }
+        else{
+            shoppingCartScreen.getInstance(this).singltemAnchorPane.toBack();
+        }
 
+    }
     @FXML
     public void mouseTrap(Event event){
         event.consume();
