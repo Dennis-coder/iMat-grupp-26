@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="620.0" prefWidth="1020.0" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="clearCartConfirmationScreen" prefHeight="620.0" prefWidth="1020.0" style="-fx-background-color: rgba(0, 0, 0.75) rgba(0, 0, 0, 0.75);">
+         <children>
+            <AnchorPane layoutX="287.0" layoutY="141.0" prefHeight="337.0" prefWidth="446.0" style="-fx-background-color: white;">
+               <children>
+                  <Label layoutX="112.0" layoutY="36.0" prefHeight="84.0" prefWidth="221.0" text="Är du säker på att du vill rensa varukorgen?" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="124.0" layoutY="98.0" prefHeight="44.0" prefWidth="198.0" text="(detta beslut går inte att ångra)" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="274.0" layoutY="188.0" mnemonicParsing="false" onAction="#confirmedClearCart" text="Rensa" />
+                  <Button layoutX="124.0" layoutY="188.0" mnemonicParsing="false" onAction="#backToCartScreen" text="Ångra" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="620.0" prefWidth="460.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/imgs/shopping_cart.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="456.0" prefHeight="620.0" prefWidth="4.0" style="-fx-background-color: black;" />
+            <Button layoutX="347.0" layoutY="459.0" mnemonicParsing="false" text="Till Kassa" />
+            <Button layoutX="237.0" layoutY="459.0" mnemonicParsing="false" onAction="#clearCartPressed" text="Rensa Varukorg" />
+            <TextArea fx:id="itemListTextArea" editable="false" focusTraversable="false" layoutX="23.0" layoutY="158.0" prefHeight="289.0" prefWidth="387.0" style="overflow:hidden">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="itemPricesTextArea" editable="false" focusTraversable="false" layoutX="303.0" layoutY="158.0" prefHeight="289.0" prefWidth="130.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <Button layoutX="330.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeScreen" text="Tillbaka till Butiken" />
+            <Pane layoutX="31.0" layoutY="159.0" prefHeight="50.0" prefWidth="271.0" style="-fx-background-color: white;" />
+            <Label layoutX="31.0" layoutY="165.0" prefHeight="35.0" prefWidth="121.0" text="Varukorg:">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Pane layoutX="305.0" layoutY="159.0" prefHeight="50.0" prefWidth="106.0" style="-fx-background-color: white;" />
+            <Label fx:id="totalPriceLabel" layoutX="313.0" layoutY="165.0" prefHeight="35.0" prefWidth="89.0" text="5500kr">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+    <AnchorPane layoutX="459.0" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="575.0">
+         <children>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="620.0" prefWidth="575.0" vbarPolicy="ALWAYS">
+               <content>
+                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="560.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="560.0" text="Dina Varor" textAlignment="CENTER">
+                           <font>
+                              <Font name="Franklin Gothic Demi Cond" size="30.0" />
+                           </font>
+                        </Label>
+                     </children></FlowPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

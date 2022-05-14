@@ -13,42 +13,20 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="738.0" prefWidth="1240.0" stylesheets="@iMat.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.iMatController">
+<AnchorPane prefHeight="738.0" prefWidth="1240.0" stylesheets="@../iMat.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imat.iMatController">
    <children>
       <StackPane prefHeight="740.0" prefWidth="1280.0">
          <children>
-            <AnchorPane fx:id="shoppingCart" onMouseClicked="#toHomepage" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
-               <children>
-                  <AnchorPane layoutX="145.0" layoutY="51.0" prefHeight="389.0" prefWidth="1045.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@resources/imgs/shopping_cart.png" />
-                           </image>
-                        </ImageView>
-                        <Button layoutX="1110.0" layoutY="29.0" mnemonicParsing="false" onAction="#toHomepage" prefHeight="48.0" prefWidth="48.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@resources/imgs/close.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <TextArea layoutX="12.0" layoutY="150.0" prefHeight="290.0" prefWidth="484.0" text="Äpple x 2    15 kr" />
-                     </children>
-                  </AnchorPane>
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="accountDetail" onMouseClicked="#toHomepage" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
                <children>
                   <AnchorPane layoutX="55.0" layoutY="57.0" prefHeight="610.0" prefWidth="1240.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@resources/imgs/avatar.png" />
+                              <Image url="@../resources/imgs/avatar.png" />
                            </image>
                         </ImageView>
                         <TextArea layoutX="13.0" layoutY="150.0" prefHeight="290.0" prefWidth="484.0" text="Vet inte&#10;&#10;Vad vi vill ha här&#10;&#10;Betallningssätt&#10;&#10;Och adress&#10;&#10;kanske är rimligt&#10;&#10;&#10;" />
@@ -56,7 +34,7 @@
                            <graphic>
                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@resources/imgs/close.png" />
+                                    <Image url="@../resources/imgs/close.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -67,11 +45,16 @@
             </AnchorPane>
             <AnchorPane fx:id="productViewScreen" onMouseClicked="#closeProductViewScreen" prefHeight="200.0" prefWidth="1280.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
                <children>
-                  <ScrollPane layoutX="300.0" layoutY="6.0" prefHeight="620.0" prefWidth="620.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="60.0">
+                  <ScrollPane layoutX="300.0" layoutY="6.0" onMouseClicked="#mouseTrap" prefHeight="620.0" prefWidth="620.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="60.0">
                      <content>
                         <FlowPane fx:id="productViewHolder" prefHeight="700.0" prefWidth="600.0" />
                      </content>
                   </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="shoppingCart" onMouseClicked="#closeShoppingCartScreen" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
+               <children>
+                  <AnchorPane fx:id="shoppingCartHolder" layoutX="130.0" layoutY="60.0" onMouseClicked="#mouseTrap" prefHeight="620.0" prefWidth="1020.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="60.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="home" style="-fx-background-color: white;">
@@ -99,7 +82,7 @@
                                        <graphic>
                                           <ImageView fitHeight="24.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@resources/imgs/search_icon.png" />
+                                                <Image url="@../resources/imgs/search_icon.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -113,7 +96,7 @@
                                  <graphic>
                                     <ImageView fitHeight="27.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@resources/imgs/avatar.png" />
+                                          <Image url="@../resources/imgs/avatar.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -125,7 +108,7 @@
                                  <graphic>
                                     <ImageView fitHeight="27.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@resources/imgs/shopping_cart.png" />
+                                          <Image url="@../resources/imgs/shopping_cart.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -133,6 +116,8 @@
                                     <Font size="18.0" />
                                  </font>
                               </Button>
+                              <Circle fx:id="shoppingCartCircle" fill="#ff1f1f" layoutX="1264.0" layoutY="16.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                              <Label fx:id="shoppingCartCurrentItems" alignment="CENTER" layoutX="1250.0" layoutY="8.0" prefHeight="17.0" prefWidth="28.0" text="12" textAlignment="CENTER" textFill="WHITE" visible="false" />
                            </children>
                         </Pane>
                         <Pane layoutY="48.0" prefHeight="93.0" prefWidth="1280.0">
@@ -159,7 +144,7 @@
                                  <children>
                                     <ImageView fitHeight="102.0" fitWidth="164.0" layoutX="25.0" layoutY="-11.0" pickOnBounds="true">
                                        <image>
-                                          <Image url="@resources/imgs/banana.png" />
+                                          <Image url="@../resources/imgs/banana.png" />
                                        </image>
                                     </ImageView>
                                     <Label fx:id="fruitLabel" layoutX="4.0" layoutY="19.0" onMouseEntered="#mouseEnteredFruitButton" onMouseExited="#mouseExitedFruitButton" styleClass="navButtonTxt" text="Frukt &amp; Grönt" textAlignment="CENTER">
@@ -176,7 +161,7 @@
                                  <children>
                                     <ImageView fitHeight="61.0" fitWidth="164.0" layoutX="26.0" layoutY="10.0" pickOnBounds="true">
                                        <image>
-                                          <Image url="@resources/imgs/Salmon.png" />
+                                          <Image url="@../resources/imgs/Salmon.png" />
                                        </image>
                                     </ImageView>
                                     <Label fx:id="meatLabel" layoutX="26.0" layoutY="19.0" onMouseEntered="#mouseEnteredMeatButton" onMouseExited="#mouseExitedMeatButton" styleClass="navButtonTxt" text="Kött &amp; Fisk" textAlignment="CENTER">
@@ -190,7 +175,7 @@
                                  <children>
                                     <ImageView fitHeight="61.0" fitWidth="143.0" layoutX="36.0" layoutY="11.0" pickOnBounds="true">
                                        <image>
-                                          <Image url="@resources/imgs/butter.png" />
+                                          <Image url="@../resources/imgs/butter.png" />
                                        </image>
                                     </ImageView>
                                     <Label fx:id="dairyLabel" layoutX="61.0" layoutY="21.0" onMouseEntered="#mouseEnteredDairyButton" onMouseExited="#mouseExitedDairyButton" styleClass="navButtonTxt" text="Mejeri" textAlignment="CENTER">
@@ -204,7 +189,7 @@
                                  <children>
                                     <ImageView fitHeight="61.0" fitWidth="93.0" layoutX="61.0" layoutY="11.0" pickOnBounds="true">
                                        <image>
-                                          <Image url="@resources/imgs/honey.png" />
+                                          <Image url="@../resources/imgs/honey.png" />
                                        </image>
                                     </ImageView>
                                     <Label fx:id="pantryLabel" layoutX="53.0" layoutY="21.0" onMouseEntered="#mouseEnteredPantryButton" onMouseExited="#mouseExitedPantryButton" styleClass="navButtonTxt" text="Skafferi">
@@ -218,7 +203,7 @@
                                  <children>
                                     <ImageView fitHeight="61.0" fitWidth="164.0" layoutX="25.0" layoutY="11.0" pickOnBounds="true">
                                        <image>
-                                          <Image url="@resources/imgs/juice.png" />
+                                          <Image url="@../resources/imgs/juice.png" />
                                        </image>
                                     </ImageView>
                                     <Label fx:id="drinksLabel" layoutX="63.0" layoutY="20.0" onMouseEntered="#mouseEnteredDrinkButton" onMouseExited="#mouseExitedDrinkButton" styleClass="navButtonTxt" text="Dryck">
@@ -239,7 +224,7 @@
                   </ScrollPane>
                   <ImageView fitHeight="29.0" fitWidth="35.0" layoutX="125.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@resources/imgs/heart.png" />
+                        <Image url="@../resources/imgs/heart.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="6.0" layoutY="149.0" text="Favoriter">

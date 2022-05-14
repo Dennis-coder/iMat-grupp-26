@@ -6,8 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -18,15 +24,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
-import se.chalmers.cse.dat216.project.IMatDataHandler;
-import se.chalmers.cse.dat216.project.Product;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+import se.chalmers.cse.dat216.project.*;
 
 
 public class iMatController implements Initializable {
 
     iMatBackendController iMatBackendController = new iMatBackendController();
     IMatDataHandler db = IMatDataHandler.getInstance();
-    private Map<Integer, productDisplayItem> productDisplayMap = new HashMap<Integer, productDisplayItem>();
+    Map<Integer, productDisplayItem> productDisplayMap = new HashMap<Integer, productDisplayItem>();
+    Map<Integer, shoppingCartItemCard> shoppingItemsMap = new HashMap<Integer, shoppingCartItemCard>();
+
     @FXML
     AnchorPane accountDetail;
     @FXML
@@ -50,21 +59,25 @@ public class iMatController implements Initializable {
     @FXML
     AnchorPane productViewScreen;
     @FXML
-    ComboBox viewScreenAmountSelect;
-    @FXML
     FlowPane productViewHolder;
-
+    @FXML
+    AnchorPane shoppingCartHolder;
+    @FXML
+    Label shoppingCartCurrentItems;
+    @FXML
+    Circle shoppingCartCircle;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for(Product product : db.getProducts()){
             productDisplayItem dispItem = new productDisplayItem(product, this);
             productDisplayMap.put(product.getProductId(), dispItem);
+            shoppingCartItemCard SCI = new shoppingCartItemCard(product, this);
+            shoppingItemsMap.put(product.getProductId(), SCI);
         }
         populateProductScreen();
+        db.getShoppingCart().addShoppingCartListener(scl);
     }
-
-
 
     @FXML
     public void toAccount(){
@@ -78,6 +91,7 @@ public class iMatController implements Initializable {
 
     @FXML
     public void toShoppingCart(){
+        shoppingCartHolder.getChildren().add(new shoppingCartScreen(this));
         shoppingCart.toFront();
     }
 
@@ -161,8 +175,8 @@ public class iMatController implements Initializable {
 
 
 
-    public void openProductViewScreen(Product product){
-        productView productView = new productView(product, this);
+    public void openProductViewScreen(Product product, int currentVal){
+        productView productView = new productView(product, currentVal, this);
         productViewHolder.getChildren().add(productView);
         productViewScreen.toFront();
     }
@@ -172,4 +186,76 @@ public class iMatController implements Initializable {
         home.toFront();
     }
 
+    @FXML
+    public void mouseTrap(Event event){
+        event.consume();
+    }
+
+    ShoppingCartListener scl = new ShoppingCartListener() {
+        @Override
+        public void shoppingCartChanged(CartEvent cartEvent) {
+            int itemsInCart = 0;
+            for (ShoppingItem SI: db.getShoppingCart().getItems()){
+                itemsInCart += SI.getAmount();
+            }
+            if (itemsInCart != 0){
+                shoppingCartCurrentItems.setVisible(true);
+                shoppingCartCircle.setVisible(true);
+                shoppingCartCurrentItems.setText(String.valueOf(itemsInCart));
+            }
+            else{
+                shoppingCartCurrentItems.setVisible(false);
+                shoppingCartCircle.setVisible(false);
+            }
+        }
+    };
+
+    @FXML
+    public void addItemToCart(Product product, int currentVal) {
+        for (ShoppingItem SI : db.getShoppingCart().getItems()) {
+            if (SI.getProduct().equals(product)) {
+                SI.setAmount(SI.getAmount() + currentVal);
+                db.getShoppingCart().fireShoppingCartChanged(SI, true);
+                return;
+            }
+        }
+        db.getShoppingCart().addItem(new ShoppingItem(product, currentVal));
+    }
+
+    public void removeItemFromCart(Product p){
+        for (ShoppingItem SI : db.getShoppingCart().getItems()) {
+            if (SI.getProduct().equals(p)) {
+                db.getShoppingCart().removeItem(SI);
+            }
+        }
+    }
+
+    @FXML
+    public void closeShoppingCartScreen(){
+        shoppingCartHolder.getChildren().clear();
+        home.toFront();
+    }
+
+    public static void delay(long millis, Runnable continuation) {
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try { Thread.sleep(millis); }
+                catch (InterruptedException e) { }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(event -> continuation.run());
+        new Thread(sleeper).start();
+    }
+
+    public void pulseAnimation(ImageView img, Timeline beat, DoubleProperty scale) {
+        img.scaleXProperty().bind(scale);
+        img.scaleYProperty().bind(scale);
+        beat.setAutoReverse(true);
+        beat.setCycleCount(Timeline.INDEFINITE);
+        beat.play();
+    }
 }
+
+

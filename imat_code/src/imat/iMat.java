@@ -21,7 +21,7 @@ public class iMat extends Application {
         
         ResourceBundle bundle = java.util.ResourceBundle.getBundle("imat/resources/iMat");
         
-        Parent root = FXMLLoader.load(getClass().getResource("iMat.fxml"), bundle);
+        Parent root = FXMLLoader.load(getClass().getResource("fxmlFiles/iMat.fxml"), bundle);
 
         Dimension launchSize = getLaunchSize();
 
@@ -38,11 +38,11 @@ public class iMat extends Application {
         Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
 
         if (screenSize.width < 1440){
-            launchSize.width = screenSize.width - 50;
+            launchSize.width = screenSize.width;
         }
 
         if (screenSize.height < 786){
-            launchSize.height = screenSize.height - 50;
+            launchSize.height = screenSize.height;
         }
 
         return launchSize;
