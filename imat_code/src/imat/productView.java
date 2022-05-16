@@ -14,9 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.util.Duration;
 import se.chalmers.cse.dat216.project.IMatDataHandler;
 import se.chalmers.cse.dat216.project.Product;
+import se.chalmers.cse.dat216.project.ProductCategory;
 
 import java.io.IOException;
 
@@ -41,9 +43,11 @@ public class productView extends AnchorPane {
     TextField addedItemsTextField;
     @FXML
     ImageView viewScreenHeart;
+    @FXML
+    FlowPane BreadCrumbPane;
 
     IMatDataHandler db = IMatDataHandler.getInstance();
-
+    categoryHandler ch = categoryHandler.getInstance();
     iMatController parentController;
     Product product;
     int currentVal;
@@ -78,6 +82,7 @@ public class productView extends AnchorPane {
         viewScreenPriceUnit.setText(product.getPrice() + " " + product.getUnit());
         viewScreenAmountSelect.getItems().clear();
         initializeComboBox();
+        setBreadCrumbs();
         if (product.isEcological()) {
             viewScreenEkoPicture.setVisible(true);
         }
@@ -85,6 +90,17 @@ public class productView extends AnchorPane {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heartFilled.png"));
         }
     }
+
+    private void setBreadCrumbs() {
+        BreadCrumbPane.getChildren().add(new BreadCrumb("Alla Produkter", false, parentController));
+        if (product.getCategory() == ProductCategory.DAIRIES){
+            BreadCrumbPane.getChildren().add(new BreadCrumb(ch.mainToString(product),true, parentController));
+            return;
+        }
+        BreadCrumbPane.getChildren().add(new BreadCrumb(ch.mainToString(product), false, parentController));
+        BreadCrumbPane.getChildren().add(new BreadCrumb(ch.subToString(product), true, parentController));
+    }
+
 
     private void initializeComboBox() {
         viewScreenAmountSelect.getItems().addAll("1", "2", "3", "4", "5", "6");

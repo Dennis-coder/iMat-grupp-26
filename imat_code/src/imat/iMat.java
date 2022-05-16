@@ -36,6 +36,7 @@ public class iMat extends Application {
     @Override
     public void stop(){
         IMatDataHandler db = IMatDataHandler.getInstance();
+        db.resetFirstRun();
         db.shutDown();
     }
 

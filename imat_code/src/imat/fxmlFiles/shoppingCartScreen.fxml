@@ -44,18 +44,17 @@
       </AnchorPane>
     <AnchorPane layoutX="459.0" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="575.0">
          <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="620.0" prefWidth="575.0" vbarPolicy="ALWAYS">
+            <ScrollPane hbarPolicy="NEVER" layoutY="77.0" prefHeight="543.0" prefWidth="575.0" vbarPolicy="ALWAYS">
                <content>
-                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="560.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="560.0" text="Dina Varor" textAlignment="CENTER">
-                           <font>
-                              <Font name="Franklin Gothic Demi Cond" size="30.0" />
-                           </font>
-                        </Label>
-                     </children></FlowPane>
+                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="560.0" />
                </content>
             </ScrollPane>
+            <Label fx:id="pa" alignment="CENTER" contentDisplay="CENTER" prefHeight="77.0" prefWidth="575.0" style="-fx-background-color: rgba(150,150,150,1);" text="Dina Varor" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="30.0" />
+               </font>
+            </Label>
+            <Button layoutX="430.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeScreen" text="Tillbaka till Butiken" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="620.0" prefWidth="460.0" style="-fx-background-color: white;">
@@ -78,7 +77,6 @@
                   <Font size="18.0" />
                </font>
             </TextArea>
-            <Button layoutX="330.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeScreen" text="Tillbaka till Butiken" />
             <Pane layoutX="31.0" layoutY="159.0" prefHeight="50.0" prefWidth="271.0" style="-fx-background-color: white;" />
             <Label layoutX="31.0" layoutY="165.0" prefHeight="35.0" prefWidth="121.0" text="Varukorg:">
                <font>
