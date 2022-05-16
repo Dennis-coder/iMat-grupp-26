@@ -4,22 +4,27 @@ package imat;
 import java.net.URL;
 import java.util.*;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import se.chalmers.cse.dat216.project.*;
 
 
@@ -30,6 +35,8 @@ public class iMatController implements Initializable {
     Map<Integer, productDisplayItem> productDisplayMap = new HashMap<>();
     Map<Integer, shoppingCartItemCard> shoppingItemsMap = new HashMap<>();
     categoryHandler categories = categoryHandler.getInstance();
+    SimpleDoubleProperty scale = new SimpleDoubleProperty(1);
+    Timeline beat;
 
     @FXML
     AnchorPane accountDetail;
@@ -91,6 +98,23 @@ public class iMatController implements Initializable {
     TextField address;
 
     Customer customer;
+    @FXML
+    Label skapa;
+    @FXML
+    Label errorLabel;
+    @FXML
+    Pane menuPane;
+    @FXML
+    Pane createdSuccessfully;
+
+    @FXML
+    ImageView profilePicOne;
+    @FXML
+    ImageView profilePicTwo;
+    @FXML
+    Rectangle rect;
+    @FXML
+    Label arrow;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -290,12 +314,60 @@ public class iMatController implements Initializable {
         new Thread(sleeper).start();
     }
 
-    public void pulseAnimation(ImageView img, Timeline beat, DoubleProperty scale) {
-        img.scaleXProperty().bind(scale);
-        img.scaleYProperty().bind(scale);
+    private void setSmall(){
+        this.scale.setValue(1);
+        this.arrow.setText("<--");
+    }
+    private void setLarge(){
+        this.scale.setValue(1.2);
+        this.arrow.setText("<----");
+    }
+
+    Timeline getBeat() {
+        Timeline tL = new Timeline(
+                new KeyFrame(Duration.ZERO, event -> setSmall()),
+                new KeyFrame(Duration.seconds(0.5), event -> setLarge()));
+        if (beat == null){
+            this.beat = tL;
+        }
+        return beat;
+    }
+
+    public void pulseAnimation(Node node, Timeline beat, DoubleProperty scale, boolean b) {
+        node.scaleXProperty().bind(scale);
+        if(b){
+            node.scaleYProperty().bind(scale);
+        }
         beat.setAutoReverse(true);
         beat.setCycleCount(Timeline.INDEFINITE);
         beat.play();
+    }
+
+    @FXML
+    public void onHoverRect(){
+        pulseAnimation(rect, this.getBeat(), scale, false);
+    }
+
+    @FXML
+    public void rectHoverStopped(){
+        setSmall();
+        this.beat.stop();
+    }
+
+    @FXML
+    public void closeProfilePicPane(){
+        rect.setVisible(true);
+        arrow.setVisible(true);
+        profilePicPane.setVisible(false);
+    }
+
+    @FXML
+    public void openProfilePicPane(){
+        rect.setVisible(false);
+        arrow.setVisible(false);
+        this.beat.stop();
+        setSmall();
+        profilePicPane.setVisible(true);
     }
 
     public void displayCategory(List<Product> products) {
@@ -370,17 +442,37 @@ public class iMatController implements Initializable {
         breadCrumbPane.getChildren().add(new BreadCrumb(categories.subToString(product), true, this));
     }
 
-    @FXML
-    private void onHoverSkip() {
+    private void onHover(Label skipLabel) {
         skipLabel.setTextFill(Color.rgb(255, 255, 255, 0.47));
         skipLabel.setUnderline(true);
     }
 
-    @FXML
-    private void onHoverSkipStop() {
+    private void onHoverStop(Label skipLabel) {
         skipLabel.setTextFill(Color.rgb(255, 255, 255, 1));
         skipLabel.setUnderline(false);
     }
+
+    @FXML
+    private void onHoverSkipStop() {
+        onHoverStop(skipLabel);
+    }
+
+    @FXML
+    private void onHoverSkip(){
+        onHover(skipLabel);
+    }
+
+    @FXML
+    private void onHoverSkapa(){
+        onHover(skapa);
+    }
+
+    @FXML
+    private void onHoverSkapaStop(){
+        onHoverStop(skapa);
+    }
+
+
 
     @FXML
     private void skipClick() {
@@ -389,14 +481,104 @@ public class iMatController implements Initializable {
 
     @FXML
     private void goToCreateAccount() {
-        if(lastName.getText() != ""){
-            db.getCustomer().setLastName(lastName.getText());
-            lastName.getParent().toBack();
+        if(firstTimeTextField.getText() != ""){
+            db.getCustomer().setLastName(firstTimeTextField.getText());
+            lastName.setText(firstTimeTextField.getText());
+            firstTimeTextField.getParent().toBack();
         }
         else {
-            lastName.setPromptText("Vänligen skriv ditt Efternamn");
+            errorLabel.setVisible(true);
+            delay(2000, ()-> errorLabel.setVisible(false));
         }
     }
+
+    @FXML
+    private void createAccount(){
+        setTextField(firstName);
+        setTextField(lastName);
+        setTextField(address);
+        setTextField(postCode);
+        setTextField(phoneNumber);
+        setTextField(email);
+    }
+
+    private void setTextField(TextField textField) {
+        if (textField.getText() != "") {
+            setTextFieldSwitch(textField.getId(), textField.getText());
+            textField.toBack();
+        } else{
+            db.getCustomer().setFirstName("");
+            textField.toFront();
+        }
+    }
+
+    private void setTextFieldSwitch(String id, String text){
+        switch (id) {
+            case "firstName":
+                db.getCustomer().setFirstName(text);
+                break;
+            case "lastName":
+                db.getCustomer().setLastName(text);
+                break;
+            case "address":
+                db.getCustomer().setPostAddress(text);
+                break;
+            case "postCode":
+                db.getCustomer().setPostCode(text);
+                break;
+            case "phoneNumber":
+                db.getCustomer().setPhoneNumber(text);
+                break;
+            case "email":
+                db.getCustomer().setEmail(text);
+                break;
+        }
+    }
+
+    @FXML
+    private void createAccountPressed(){
+        if (db.isCustomerComplete()){
+            firstTimeScreen.toBack();
+            menuPane.toFront();
+            createdSuccessfully.setVisible(true);
+            createdSuccessfully.toFront();
+            delay(4000, () -> createdSuccessfully.setVisible(false));
+            createdSuccessfully.toBack();
+        }
+        else{
+            errorLabel.setVisible(true);
+            delay(2000, ()-> errorLabel.setVisible(false));
+        }
+    }
+
+    @FXML
+    AnchorPane profilePicPane;
+
+    @FXML
+    public void pickOwl(){
+        Image owl = new Image("/imat/resources/imgs/owl.png");
+        profilePicOne.setImage(owl);
+        profilePicTwo.setImage(owl);
+    }
+
+    @FXML
+    public void pickMonkey(){
+        Image monkey = new Image("/imat/resources/imgs/monkey.png");
+        profilePicOne.setImage(monkey);
+        profilePicTwo.setImage(monkey);
+    }
+
+    @FXML
+    public void pickPenguin(){
+        Image penguin = new Image("/imat/resources/imgs/penguin.png");
+        profilePicOne.setImage(penguin);
+        profilePicTwo.setImage(penguin);
+    }
+
+
+
+
+
 
 
 

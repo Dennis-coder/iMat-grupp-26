@@ -46,3 +46,12 @@
     -fx-text-fill: white;
 }
 
+
+#imatSkapaButton{
+    -fx-background-radius: 999px;
+    -fx-border-radius: 999px;
+    -fx-border-color: #404040;
+    -fx-border-width: 4px;
+    -fx-background-color: red;
+}
+
