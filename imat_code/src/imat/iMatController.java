@@ -4,28 +4,22 @@ package imat;
 import java.net.URL;
 import java.util.*;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
 import se.chalmers.cse.dat216.project.*;
 
 
@@ -81,6 +75,22 @@ public class iMatController implements Initializable {
     AnchorPane firstTimeScreen;
     @FXML
     Label skipLabel;
+    @FXML
+    TextField firstTimeTextField;
+    @FXML
+    TextField firstName;
+    @FXML
+    TextField lastName;
+    @FXML
+    TextField postCode;
+    @FXML
+    TextField phoneNumber;
+    @FXML
+    TextField email;
+    @FXML
+    TextField address;
+
+    Customer customer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -90,7 +100,7 @@ public class iMatController implements Initializable {
             shoppingCartItemCard SCI = new shoppingCartItemCard(product, this);
             shoppingItemsMap.put(product.getProductId(), SCI);
         }
-        if(db.isFirstRun()){
+        if (db.isFirstRun()) {
             firstTimeScreen.toFront();
         }
         populateProductScreen();
@@ -303,7 +313,6 @@ public class iMatController implements Initializable {
     }
 
 
-
     @FXML
     public void displayCatVeg() {
         displayCategory(categories.getVegCategoryProducts());
@@ -333,8 +342,7 @@ public class iMatController implements Initializable {
         if (products.equals(db.getProducts())) {
             searchScreenLabel.setText("Alla Produkter  ");
             breadCrumbPane.getChildren().add(new BreadCrumb("Alla Produkter", true, this));
-        }
-        else{
+        } else {
             for (Product p : products) {
                 if (p.getCategory() != products.get(0).getCategory()) {
                     searchScreenLabel.setText(categories.mainToString(p) + "  ");
@@ -347,15 +355,15 @@ public class iMatController implements Initializable {
         }
     }
 
-    private void addBreadCrumbsMain(Product p){
+    private void addBreadCrumbsMain(Product p) {
         breadCrumbPane.getChildren().add(new BreadCrumb("Alla Produkter", false, this));
         breadCrumbPane.getChildren().add(new BreadCrumb(categories.mainToString(p), true, this));
     }
 
-    private void addBreadCrumbsSub(Product product){
+    private void addBreadCrumbsSub(Product product) {
         breadCrumbPane.getChildren().add(new BreadCrumb("Alla Produkter", false, this));
-        if (product.getCategory() == ProductCategory.DAIRIES){
-            breadCrumbPane.getChildren().add(new BreadCrumb(categories.mainToString(product),true, this));
+        if (product.getCategory() == ProductCategory.DAIRIES) {
+            breadCrumbPane.getChildren().add(new BreadCrumb(categories.mainToString(product), true, this));
             return;
         }
         breadCrumbPane.getChildren().add(new BreadCrumb(categories.mainToString(product), false, this));
@@ -363,13 +371,13 @@ public class iMatController implements Initializable {
     }
 
     @FXML
-    private void onHoverSkip(){
+    private void onHoverSkip() {
         skipLabel.setTextFill(Color.rgb(255, 255, 255, 0.47));
         skipLabel.setUnderline(true);
     }
 
     @FXML
-    private void onHoverSkipStop(){
+    private void onHoverSkipStop() {
         skipLabel.setTextFill(Color.rgb(255, 255, 255, 1));
         skipLabel.setUnderline(false);
     }
@@ -378,6 +386,18 @@ public class iMatController implements Initializable {
     private void skipClick() {
         firstTimeScreen.toBack();
     }
+
+    @FXML
+    private void goToCreateAccount() {
+        if(lastName.getText() != ""){
+            db.getCustomer().setLastName(lastName.getText());
+            lastName.getParent().toBack();
+        }
+        else {
+            lastName.setPromptText("Vänligen skriv ditt Efternamn");
+        }
+    }
+
 
 
 }

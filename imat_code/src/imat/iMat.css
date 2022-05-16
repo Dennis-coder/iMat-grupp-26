@@ -40,3 +40,9 @@
     -fx-font-size: 36;
 }
 
+.firstTimeTxt{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+}
+
