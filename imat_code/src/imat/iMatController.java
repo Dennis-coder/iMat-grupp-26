@@ -315,29 +315,31 @@ public class iMatController implements Initializable {
     }
 
     private void setSmall(){
-        this.scale.setValue(1);
+        rect.setWidth(50);
+        rect.setLayoutX(566);
         this.arrow.setText("<--");
+        arrow.setPrefWidth(50);
+        arrow.setLayoutX(566);
     }
     private void setLarge(){
-        this.scale.setValue(1.2);
-        this.arrow.setText("<----");
+        rect.setWidth(65);
+        rect.setLayoutX(546);
+        this.arrow.setText("<-----");
+        arrow.setPrefWidth(80);
+        arrow.setLayoutX(546);
     }
 
-    Timeline getBeat() {
-        Timeline tL = new Timeline(
+    void getBeat() {
+        if (beat == null){
+        this.beat = new Timeline(
                 new KeyFrame(Duration.ZERO, event -> setSmall()),
                 new KeyFrame(Duration.seconds(0.5), event -> setLarge()));
-        if (beat == null){
-            this.beat = tL;
         }
-        return beat;
     }
 
-    public void pulseAnimation(Node node, Timeline beat, DoubleProperty scale, boolean b) {
-        node.scaleXProperty().bind(scale);
-        if(b){
-            node.scaleYProperty().bind(scale);
-        }
+    public void pulseAnimation() {
+        arrow.setPrefWidth(70);
+        arrow.setLayoutX(566);
         beat.setAutoReverse(true);
         beat.setCycleCount(Timeline.INDEFINITE);
         beat.play();
@@ -345,7 +347,8 @@ public class iMatController implements Initializable {
 
     @FXML
     public void onHoverRect(){
-        pulseAnimation(rect, this.getBeat(), scale, false);
+        getBeat();
+        pulseAnimation();
     }
 
     @FXML

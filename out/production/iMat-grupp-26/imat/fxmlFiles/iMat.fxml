@@ -415,7 +415,7 @@
                                     <Button layoutX="160.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#closeProfilePicPane" text="Stäng" />
                                  </children>
                               </AnchorPane>
-                              <Rectangle fx:id="rect" arcHeight="3.0" arcWidth="3.0" height="43.0" layoutX="600.0" layoutY="50.0" stroke="BLACK" strokeType="INSIDE" width="47.0" AnchorPane.rightAnchor="8.0">
+                              <Rectangle fx:id="rect" arcHeight="3.0" arcWidth="3.0" height="43.0" layoutX="590.0" layoutY="51.0" nodeOrientation="RIGHT_TO_LEFT" stroke="BLACK" strokeType="INSIDE" width="47.0" AnchorPane.rightAnchor="0.0">
                                  <fill>
                                     <LinearGradient endX="1.0" endY="1.0">
                                        <stops>
@@ -433,7 +433,7 @@
                                     </LinearGradient>
                                  </fill>
                               </Rectangle>
-                              <Label fx:id="arrow" alignment="CENTER" layoutX="556.0" layoutY="51.0" onMouseClicked="#openProfilePicPane" onMouseEntered="#onHoverRect" onMouseExited="#rectHoverStopped" prefHeight="42.0" prefWidth="47.0" text="&lt;--" textFill="WHITE" AnchorPane.rightAnchor="8.0">
+                              <Label fx:id="arrow" alignment="CENTER" contentDisplay="RIGHT" layoutX="556.0" layoutY="51.0" maxHeight="42.0" maxWidth="70.0" minHeight="42.0" minWidth="50.0" onMouseClicked="#openProfilePicPane" onMouseEntered="#onHoverRect" onMouseExited="#rectHoverStopped" prefHeight="42.0" prefWidth="50.0" text="&lt;--" textFill="WHITE" AnchorPane.rightAnchor="0.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

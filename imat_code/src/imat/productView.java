@@ -46,6 +46,7 @@ public class productView extends AnchorPane {
     @FXML
     FlowPane BreadCrumbPane;
 
+
     IMatDataHandler db = IMatDataHandler.getInstance();
     categoryHandler ch = categoryHandler.getInstance();
     iMatController parentController;
@@ -126,14 +127,28 @@ public class productView extends AnchorPane {
         iMatController.delay(1000, () -> addedItemsTextField.setVisible(false));
     }
 
+    void getBeat(){
+        this.beat = new Timeline(
+                new KeyFrame(Duration.ZERO, event -> scale.setValue(1)),
+                new KeyFrame(Duration.seconds(0.5), event -> scale.setValue(1.1)));
+    }
+
+    private void pulseAnimation(){
+        viewScreenHeart.scaleYProperty().bind(scale);
+        viewScreenHeart.scaleXProperty().bind(scale);
+        beat.setAutoReverse(true);
+        beat.setCycleCount(Timeline.INDEFINITE);
+        beat.play();
+    }
 
     @FXML
     public void heartHover() {
         if (favourite) {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heart.png"));
         } else {
-            beat = parentController.getBeat();
-            parentController.pulseAnimation(viewScreenHeart, beat, scale, true);
+            getBeat();
+            viewScreenHeart.scaleYProperty().bind(scale);
+            pulseAnimation();
         }
     }
 
