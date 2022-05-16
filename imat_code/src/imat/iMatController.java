@@ -6,14 +6,13 @@ import java.util.*;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -36,7 +35,7 @@ public class iMatController implements Initializable {
     Map<Integer, shoppingCartItemCard> shoppingItemsMap = new HashMap<>();
     categoryHandler categories = categoryHandler.getInstance();
     SimpleDoubleProperty scale = new SimpleDoubleProperty(1);
-    Timeline beat;
+    Timeline beat = this.getBeat();
 
     @FXML
     AnchorPane accountDetail;
@@ -106,15 +105,22 @@ public class iMatController implements Initializable {
     Pane menuPane;
     @FXML
     Pane createdSuccessfully;
+    @FXML
+    Label editLabel;
 
     @FXML
     ImageView profilePicOne;
     @FXML
     ImageView profilePicTwo;
     @FXML
+    ImageView profilePicThree;
+    @FXML
     Rectangle rect;
     @FXML
     Label arrow;
+    @FXML
+    TextArea mainTextAreaProfile;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -329,12 +335,13 @@ public class iMatController implements Initializable {
         arrow.setLayoutX(546);
     }
 
-    void getBeat() {
+    Timeline getBeat() {
         if (beat == null){
         this.beat = new Timeline(
                 new KeyFrame(Duration.ZERO, event -> setSmall()),
                 new KeyFrame(Duration.seconds(0.5), event -> setLarge()));
         }
+        return this.beat;
     }
 
     public void pulseAnimation() {
@@ -477,6 +484,18 @@ public class iMatController implements Initializable {
 
 
 
+
+    @FXML
+    private void onHoverDark(){
+        editLabel.setTextFill(Color.rgb(50, 50, 50, 0.7));
+        editLabel.setUnderline(true);
+    }
+    @FXML
+    private void onHoverDarkStop(){
+        editLabel.setTextFill(Color.rgb(0, 0, 0, 1));
+        editLabel.setUnderline(true);
+    }
+
     @FXML
     private void skipClick() {
         firstTimeScreen.toBack();
@@ -543,6 +562,7 @@ public class iMatController implements Initializable {
         if (db.isCustomerComplete()){
             firstTimeScreen.toBack();
             menuPane.toFront();
+            updateAccountText();
             createdSuccessfully.setVisible(true);
             createdSuccessfully.toFront();
             delay(4000, () -> createdSuccessfully.setVisible(false));
@@ -554,6 +574,13 @@ public class iMatController implements Initializable {
         }
     }
 
+    private void updateAccountText() {
+        mainTextAreaProfile.clear();
+        mainTextAreaProfile.setText("Förnamn:  " + "\n\n" +
+                "Efternamn:  " + "\n\n" + "Adress:"   + "\n\n" + "Telefon:  " + "\n\n"
+                + "Email:  " + "\n\n" + "Postnummer:  " + "\n\n");
+    }
+
     @FXML
     AnchorPane profilePicPane;
 
@@ -562,6 +589,7 @@ public class iMatController implements Initializable {
         Image owl = new Image("/imat/resources/imgs/owl.png");
         profilePicOne.setImage(owl);
         profilePicTwo.setImage(owl);
+        profilePicThree.setImage(owl);
     }
 
     @FXML
@@ -569,6 +597,7 @@ public class iMatController implements Initializable {
         Image monkey = new Image("/imat/resources/imgs/monkey.png");
         profilePicOne.setImage(monkey);
         profilePicTwo.setImage(monkey);
+        profilePicThree.setImage(monkey);
     }
 
     @FXML
@@ -576,6 +605,7 @@ public class iMatController implements Initializable {
         Image penguin = new Image("/imat/resources/imgs/penguin.png");
         profilePicOne.setImage(penguin);
         profilePicTwo.setImage(penguin);
+        profilePicThree.setImage(penguin);
     }
 
 

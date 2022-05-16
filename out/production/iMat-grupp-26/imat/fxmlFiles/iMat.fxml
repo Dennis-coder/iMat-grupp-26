@@ -24,29 +24,6 @@
    <children>
       <StackPane prefHeight="740.0" prefWidth="1280.0">
          <children>
-            <AnchorPane fx:id="accountDetail" onMouseClicked="#toHomepage" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
-               <children>
-                  <AnchorPane layoutX="55.0" layoutY="57.0" prefHeight="610.0" prefWidth="1240.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/imgs/avatar.png" />
-                           </image>
-                        </ImageView>
-                        <TextArea layoutX="13.0" layoutY="150.0" prefHeight="290.0" prefWidth="484.0" text="Vet inte&#10;&#10;Vad vi vill ha här&#10;&#10;Betallningssätt&#10;&#10;Och adress&#10;&#10;kanske är rimligt&#10;&#10;&#10;" />
-                        <Button layoutX="956.0" layoutY="27.0" mnemonicParsing="false" onAction="#toHomepage" prefHeight="48.0" prefWidth="48.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/close.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="productViewScreen" onMouseClicked="#closeProductViewScreen" prefHeight="200.0" prefWidth="1280.0" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
                <children>
                   <ScrollPane layoutX="300.0" layoutY="6.0" onMouseClicked="#mouseTrap" prefHeight="620.0" prefWidth="620.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="60.0">
@@ -59,6 +36,213 @@
             <AnchorPane fx:id="shoppingCart" onMouseClicked="#closeShoppingCartScreen" style="-fx-background-color: rgba(0, 0, 0, 0.75);">
                <children>
                   <AnchorPane fx:id="shoppingCartHolder" layoutX="130.0" layoutY="60.0" onMouseClicked="#mouseTrap" prefHeight="620.0" prefWidth="1020.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="60.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane id="#imatSkapaButton" fx:id="firstTimeScreen" prefHeight="745.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.4);">
+               <children>
+                  <StackPane layoutX="321.0" layoutY="133.76431274414062">
+                     <children>
+                        <AnchorPane prefHeight="333.0" prefWidth="502.0" style="-fx-background-color: navy;">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" layoutX="205.0" layoutY="221.0" prefHeight="18.0" prefWidth="65.0" styleClass="firstTimeTxt" text="Förnamn:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="206.0" layoutY="181.0" prefHeight="18.0" prefWidth="63.0" styleClass="firstTimeTxt" text="Efternamn:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="224.0" layoutY="261.0" prefHeight="18.0" prefWidth="48.0" styleClass="firstTimeTxt" text="Adress:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="220.0" layoutY="301.0" prefHeight="18.0" prefWidth="55.0" styleClass="firstTimeTxt" text="Postkod:" />
+                              <Label alignment="CENTER_RIGHT" layoutX="201.0" layoutY="341.0" prefHeight="18.0" prefWidth="73.0" styleClass="firstTimeTxt" text="Telefon:" />
+                              <Label layoutX="238.0" layoutY="378.0" styleClass="firstTimeTxt" text="Email:" />
+                              <ImageView fx:id="profilePicOne" fitHeight="150.0" fitWidth="164.0" layoutX="237.0" layoutY="14.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/avatar.png" />
+                                 </image>
+                              </ImageView>
+                              <Circle fill="DODGERBLUE" layoutX="375.0" layoutY="153.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Label alignment="CENTER" layoutX="356.0" layoutY="138.0" onMouseClicked="#openProfilePicPane" prefHeight="29.0" prefWidth="37.0" text="+" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Label>
+                              <Pane id="imatSkapaButton" layoutX="244.0" layoutY="410.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: red;">
+                                 <children>
+                                    <Label fx:id="skapa" alignment="CENTER" layoutX="7.0" layoutY="3.0" onMouseClicked="#createAccountPressed" onMouseEntered="#onHoverSkapa" onMouseExited="#onHoverSkapaStop" prefHeight="34.0" prefWidth="136.0" text="Skapa konto" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Label>
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Pane>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/checkMark.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/checkMark.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/checkMark.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/checkMark.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/checkMark.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/checkMark.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="firstName" layoutX="286.0" layoutY="177.0" onAction="#createAccount" />
+                              <TextField fx:id="lastName" layoutX="286.0" layoutY="217.0" onAction="#createAccount" />
+                              <TextField fx:id="address" layoutX="286.0" layoutY="257.0" onAction="#createAccount" />
+                              <TextField fx:id="postCode" layoutX="286.0" layoutY="297.0" onAction="#createAccount" />
+                              <TextField fx:id="phoneNumber" layoutX="286.0" layoutY="337.0" onAction="#createAccount" />
+                              <TextField fx:id="email" layoutX="286.0" layoutY="377.0" onAction="#createAccount" />
+                              <AnchorPane fx:id="profilePicPane" layoutX="422.0" layoutY="14.0" prefHeight="133.0" prefWidth="215.0" style="-fx-background-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="110.0" text="Välj en profilbild:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="61.0" fitWidth="63.0" layoutX="80.0" layoutY="46.0" onMouseClicked="#pickMonkey" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/imgs/monkey.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <ImageView fitHeight="61.0" fitWidth="65.0" layoutX="15.0" layoutY="46.0" onMouseClicked="#pickOwl" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/imgs/owl.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <ImageView fitHeight="61.0" fitWidth="63.0" layoutX="146.0" layoutY="46.0" onMouseClicked="#pickPenguin" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/imgs/penguin.png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <Button layoutX="160.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#closeProfilePicPane" text="Stäng" />
+                                 </children>
+                              </AnchorPane>
+                              <Rectangle fx:id="rect" arcHeight="3.0" arcWidth="3.0" height="43.0" layoutX="590.0" layoutY="51.0" nodeOrientation="RIGHT_TO_LEFT" stroke="BLACK" strokeType="INSIDE" width="47.0" AnchorPane.rightAnchor="0.0">
+                                 <fill>
+                                    <LinearGradient endX="1.0" endY="1.0">
+                                       <stops>
+                                          <Stop>
+                                             <color>
+                                                <Color red="0.22807016968727112" green="0.05349794402718544" blue="0.05349794402718544" />
+                                             </color>
+                                          </Stop>
+                                          <Stop offset="1.0">
+                                             <color>
+                                                <Color red="1.0" green="0.11999999731779099" blue="0.11999999731779099" />
+                                             </color>
+                                          </Stop>
+                                       </stops>
+                                    </LinearGradient>
+                                 </fill>
+                              </Rectangle>
+                              <Label fx:id="arrow" alignment="CENTER" contentDisplay="RIGHT" layoutX="556.0" layoutY="51.0" maxHeight="42.0" maxWidth="70.0" minHeight="42.0" minWidth="50.0" onMouseClicked="#openProfilePicPane" onMouseEntered="#onHoverRect" onMouseExited="#rectHoverStopped" prefHeight="42.0" prefWidth="50.0" text="&lt;--" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="459.0" prefWidth="637.0" style="-fx-background-color: navy;">
+                           <children>
+                              <Label alignment="CENTER" layoutX="142.0" layoutY="38.0" prefHeight="93.0" prefWidth="354.0" text="Välkommen till iMat!" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="471.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+                                 <image>
+                                    <Image url="@../resources/imgs/champagne.png" />
+                                 </image>
+                              </ImageView>
+                              <TextField fx:id="firstTimeTextField" layoutX="245.0" layoutY="254.0" onAction="#goToCreateAccount" promptText="Efternamn" />
+                              <Label layoutX="157.0" layoutY="216.0" text="Kom igång och starta ett konto redan nu" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="245.0" layoutY="299.0" prefHeight="43.0" prefWidth="107.0" text="Inte Sugen? Du kan det här steget" textFill="WHITE" wrapText="true" />
+                              <Label fx:id="skipLabel" alignment="BOTTOM_LEFT" layoutX="352.0" layoutY="297.0" onMouseClicked="#skipClick" onMouseEntered="#onHoverSkip" onMouseExited="#onHoverSkipStop" prefHeight="27.0" prefWidth="107.0" text="HOPPA ÖVER" textFill="WHITE">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+                  <Label fx:id="errorLabel" alignment="CENTER" focusTraversable="false" layoutX="463.0" layoutY="80.0" prefHeight="34.0" prefWidth="354.0" style="-fx-background-color: white;" styleClass="navButton" text="Var vänlig, fyll i alla fält för att fortsätta" visible="false">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="accountDetail" onMouseClicked="#toHomepage" style="-fx-background-color: rgba(0, 0, 0, 0.5);">
+               <children>
+                  <AnchorPane layoutX="55.0" layoutY="57.0" prefHeight="610.0" prefWidth="1240.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <ImageView fx:id="profilePicThree" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/imgs/avatar.png" />
+                           </image>
+                        </ImageView>
+                        <TextArea fx:id="mainTextAreaProfile" editable="false" layoutX="13.0" layoutY="150.0" prefHeight="290.0" prefWidth="484.0" text="Vet inte&#10;&#10;Vad vi vill ha här&#10;&#10;Betallningssätt&#10;&#10;Och adress&#10;&#10;kanske är rimligt&#10;&#10;&#10;" />
+                        <Button layoutX="956.0" layoutY="27.0" mnemonicParsing="false" onAction="#toHomepage" prefHeight="48.0" prefWidth="48.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/close.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Circle fill="DODGERBLUE" layoutX="121.0" layoutY="127.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label alignment="CENTER" layoutX="102.0" layoutY="112.0" onMouseClicked="#openProfilePicPane" prefHeight="29.0" prefWidth="37.0" text="+" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                        <Label fx:id="editLabel" alignment="CENTER_RIGHT" layoutX="347.0" layoutY="132.0" onMouseEntered="#onHoverDark" onMouseExited="#onHoverDarkStop" prefWidth="150.0" text="Redigera Information" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="home" style="-fx-background-color: white;">
@@ -273,180 +457,6 @@
                         </Pane>
                      </children>
                   </Pane>
-               </children>
-            </AnchorPane>
-            <AnchorPane id="#imatSkapaButton" fx:id="firstTimeScreen" prefHeight="745.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.4);">
-               <children>
-                  <StackPane layoutX="321.0" layoutY="133.76431274414062">
-                     <children>
-                        <AnchorPane prefHeight="459.0" prefWidth="637.0" style="-fx-background-color: navy;">
-                           <children>
-                              <Label alignment="CENTER" layoutX="142.0" layoutY="38.0" prefHeight="93.0" prefWidth="354.0" text="Välkommen till iMat!" textAlignment="CENTER" textFill="WHITE">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="471.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
-                                 <image>
-                                    <Image url="@../resources/imgs/champagne.png" />
-                                 </image>
-                              </ImageView>
-                              <TextField fx:id="firstTimeTextField" layoutX="245.0" layoutY="254.0" onAction="#goToCreateAccount" promptText="Efternamn" />
-                              <Label layoutX="157.0" layoutY="216.0" text="Kom igång och starta ett konto redan nu" textFill="WHITE">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="245.0" layoutY="299.0" prefHeight="43.0" prefWidth="107.0" text="Inte Sugen? Du kan det här steget" textFill="WHITE" wrapText="true" />
-                              <Label fx:id="skipLabel" alignment="BOTTOM_LEFT" layoutX="352.0" layoutY="297.0" onMouseClicked="#skipClick" onMouseEntered="#onHoverSkip" onMouseExited="#onHoverSkipStop" prefHeight="27.0" prefWidth="107.0" text="HOPPA ÖVER" textFill="WHITE">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="333.0" prefWidth="502.0" style="-fx-background-color: navy;">
-                           <children>
-                              <Label alignment="CENTER_RIGHT" layoutX="205.0" layoutY="221.0" prefHeight="18.0" prefWidth="65.0" styleClass="firstTimeTxt" text="Förnamn:" />
-                              <Label alignment="CENTER_RIGHT" layoutX="206.0" layoutY="181.0" prefHeight="18.0" prefWidth="63.0" styleClass="firstTimeTxt" text="Efternamn:" />
-                              <Label alignment="CENTER_RIGHT" layoutX="224.0" layoutY="261.0" prefHeight="18.0" prefWidth="48.0" styleClass="firstTimeTxt" text="Adress:" />
-                              <Label alignment="CENTER_RIGHT" layoutX="220.0" layoutY="301.0" prefHeight="18.0" prefWidth="55.0" styleClass="firstTimeTxt" text="Postkod:" />
-                              <Label alignment="CENTER_RIGHT" layoutX="201.0" layoutY="341.0" prefHeight="18.0" prefWidth="73.0" styleClass="firstTimeTxt" text="Telefon:" />
-                              <Label layoutX="238.0" layoutY="378.0" styleClass="firstTimeTxt" text="Email:" />
-                              <ImageView fx:id="profilePicOne" fitHeight="150.0" fitWidth="164.0" layoutX="237.0" layoutY="14.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/avatar.png" />
-                                 </image>
-                              </ImageView>
-                              <Circle fill="DODGERBLUE" layoutX="375.0" layoutY="153.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Label alignment="CENTER" layoutX="356.0" layoutY="138.0" onMouseClicked="#openProfilePicPane" prefHeight="29.0" prefWidth="37.0" text="+" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Label>
-                              <Pane id="imatSkapaButton" layoutX="244.0" layoutY="410.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: red;">
-                                 <children>
-                                    <Label fx:id="skapa" alignment="CENTER" layoutX="7.0" layoutY="3.0" onMouseClicked="#createAccountPressed" onMouseEntered="#onHoverSkapa" onMouseExited="#onHoverSkapaStop" prefHeight="34.0" prefWidth="136.0" text="Skapa konto" textFill="WHITE">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Label>
-                                 </children>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Pane>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/checkMark.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/checkMark.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/checkMark.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/checkMark.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/checkMark.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="410.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/checkMark.png" />
-                                 </image>
-                              </ImageView>
-                              <TextField fx:id="firstName" layoutX="286.0" layoutY="177.0" onAction="#createAccount" />
-                              <TextField fx:id="lastName" layoutX="286.0" layoutY="217.0" onAction="#createAccount" />
-                              <TextField fx:id="address" layoutX="286.0" layoutY="257.0" onAction="#createAccount" />
-                              <TextField fx:id="postCode" layoutX="286.0" layoutY="297.0" onAction="#createAccount" />
-                              <TextField fx:id="phoneNumber" layoutX="286.0" layoutY="337.0" onAction="#createAccount" />
-                              <TextField fx:id="email" layoutX="286.0" layoutY="377.0" onAction="#createAccount" />
-                              <AnchorPane fx:id="profilePicPane" layoutX="422.0" layoutY="14.0" prefHeight="133.0" prefWidth="215.0" style="-fx-background-color: white;" visible="false">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="110.0" text="Välj en profilbild:">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <ImageView fitHeight="61.0" fitWidth="63.0" layoutX="80.0" layoutY="46.0" onMouseClicked="#pickMonkey" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/imgs/monkey.png" />
-                                       </image>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ImageView>
-                                    <ImageView fitHeight="61.0" fitWidth="65.0" layoutX="15.0" layoutY="46.0" onMouseClicked="#pickOwl" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/imgs/owl.png" />
-                                       </image>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ImageView>
-                                    <ImageView fitHeight="61.0" fitWidth="63.0" layoutX="146.0" layoutY="46.0" onMouseClicked="#pickPenguin" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/imgs/penguin.png" />
-                                       </image>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </ImageView>
-                                    <Button layoutX="160.0" layoutY="11.0" mnemonicParsing="false" onMouseClicked="#closeProfilePicPane" text="Stäng" />
-                                 </children>
-                              </AnchorPane>
-                              <Rectangle fx:id="rect" arcHeight="3.0" arcWidth="3.0" height="43.0" layoutX="590.0" layoutY="51.0" nodeOrientation="RIGHT_TO_LEFT" stroke="BLACK" strokeType="INSIDE" width="47.0" AnchorPane.rightAnchor="0.0">
-                                 <fill>
-                                    <LinearGradient endX="1.0" endY="1.0">
-                                       <stops>
-                                          <Stop>
-                                             <color>
-                                                <Color red="0.22807016968727112" green="0.05349794402718544" blue="0.05349794402718544" />
-                                             </color>
-                                          </Stop>
-                                          <Stop offset="1.0">
-                                             <color>
-                                                <Color red="1.0" green="0.11999999731779099" blue="0.11999999731779099" />
-                                             </color>
-                                          </Stop>
-                                       </stops>
-                                    </LinearGradient>
-                                 </fill>
-                              </Rectangle>
-                              <Label fx:id="arrow" alignment="CENTER" contentDisplay="RIGHT" layoutX="556.0" layoutY="51.0" maxHeight="42.0" maxWidth="70.0" minHeight="42.0" minWidth="50.0" onMouseClicked="#openProfilePicPane" onMouseEntered="#onHoverRect" onMouseExited="#rectHoverStopped" prefHeight="42.0" prefWidth="50.0" text="&lt;--" textFill="WHITE" AnchorPane.rightAnchor="0.0">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </StackPane>
-                  <Label fx:id="errorLabel" alignment="CENTER" focusTraversable="false" layoutX="463.0" layoutY="80.0" prefHeight="34.0" prefWidth="354.0" style="-fx-background-color: white;" styleClass="navButton" text="Var vänlig, fyll i alla fält för att fortsätta" visible="false">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
          </children>
