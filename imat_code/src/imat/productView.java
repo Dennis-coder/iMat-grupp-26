@@ -52,7 +52,7 @@ public class productView extends AnchorPane {
     Product product;
     int currentVal;
     Timeline beat;
-    DoubleProperty scale = new SimpleDoubleProperty(1);
+    SimpleDoubleProperty scale = new SimpleDoubleProperty(1);
     boolean favourite = false;
 
     public productView(Product product, int currentVal, iMatController parentController) {
@@ -126,20 +126,14 @@ public class productView extends AnchorPane {
         iMatController.delay(1000, () -> addedItemsTextField.setVisible(false));
     }
 
-    private void getBeat() {
-        beat = new Timeline(
-                new KeyFrame(Duration.ZERO, event -> scale.setValue(1)),
-                new KeyFrame(Duration.seconds(0.5), event -> scale.setValue(1.1))
-        );
-    }
 
     @FXML
     public void heartHover() {
         if (favourite) {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heart.png"));
         } else {
-            getBeat();
-            parentController.pulseAnimation(viewScreenHeart, beat, scale);
+            beat = parentController.getBeat();
+            parentController.pulseAnimation(viewScreenHeart, beat, scale, true);
         }
     }
 
