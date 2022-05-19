@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -37,7 +38,9 @@ public class productDisplayItem extends AnchorPane {
     @FXML
     ImageView ekoImg;
     @FXML
-    AnchorPane clickablePane;
+    ImageView heartImg;
+    @FXML
+    TextField itemAdded;
 
 
     public productDisplayItem(Product product, iMatController controller){
@@ -59,8 +62,8 @@ public class productDisplayItem extends AnchorPane {
 
     private void init(){
         title.setText(product.getName());
-        prize.setText(String.valueOf(product.getPrice()) + ":-");
-        prizePerUnit.setText(String.valueOf(product.getPrice()) + " " + product.getUnit());
+        prize.setText(product.getPrice() + ":-");
+        prizePerUnit.setText(product.getPrice() + " " + product.getUnit());
         initializeComboBox();
         setPicture();
     }
@@ -71,8 +74,10 @@ public class productDisplayItem extends AnchorPane {
 
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue != ""){
                 currentVal = Integer.valueOf(newValue);
                 prize.setText(String.format("%.2f", (product.getPrice() * currentVal)) + ":-");
+                }
             }
         });
     }
@@ -81,6 +86,9 @@ public class productDisplayItem extends AnchorPane {
         picture.setImage(db.getFXImage(product, 220, 180));
         if(product.isEcological()){
             ekoImg.setVisible(true);
+        }
+        if (db.isFavorite(product)){
+            heartImg.setVisible(true);
         }
     }
 
@@ -92,18 +100,31 @@ public class productDisplayItem extends AnchorPane {
     @FXML
     public void onHover(){
         title.setUnderline(true);
-        clickablePane.setEffect(new DropShadow(50, 0, 0, Color.GOLD));
+        picture.setEffect(new DropShadow(50, 0, 0, Color.GOLD));
     }
 
     @FXML
     public void hoverStopped(){
         title.setUnderline(false);
-        clickablePane.setEffect(null);
+        picture.setEffect(null);
     }
 
     @FXML
     public void addButtonPressed() {
+        itemAdded.setVisible(true);
         parentController.addItemToCart(product, currentVal);
+        iMatController.delay(1000, () -> itemAdded.setVisible(false));
     }
+
+    @FXML
+    public void becameFavorite(){
+        heartImg.setVisible(true);
+    }
+
+    @FXML
+    public void removedFavorite(){
+        heartImg.setVisible(false);
+    }
+
 
 }

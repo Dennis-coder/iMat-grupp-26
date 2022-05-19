@@ -36,7 +36,6 @@ public class iMat extends Application {
     @Override
     public void stop(){
         IMatDataHandler db = IMatDataHandler.getInstance();
-        db.resetFirstRun();
         db.shutDown();
     }
 
@@ -50,7 +49,7 @@ public class iMat extends Application {
         }
 
         if (screenSize.height < 786){
-            launchSize.height = screenSize.height - 50;
+            launchSize.height = screenSize.height - 70;
         }
 
         return launchSize;
@@ -62,5 +61,5 @@ public class iMat extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

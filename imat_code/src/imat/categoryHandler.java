@@ -16,10 +16,10 @@ public class categoryHandler {
     IMatDataHandler db = IMatDataHandler.getInstance();
     private static categoryHandler instance = null;
 
-    private categoryHandler(){
+    private categoryHandler() {
     }
 
-    public static categoryHandler getInstance(){
+    public static categoryHandler getInstance() {
         if (instance == null) {
             instance = new categoryHandler();
             instance.init();
@@ -51,7 +51,7 @@ public class categoryHandler {
         PantryCategoryProducts.addAll(db.getProducts(ProductCategory.SWEET));
         VegCategoryProducts.addAll(db.getProducts(ProductCategory.HERB));
         subCategoryString.put(ProductCategory.POD, "Baljväxter");
-        subCategoryString.put(ProductCategory.BREAD , "Bröd");
+        subCategoryString.put(ProductCategory.BREAD, "Bröd");
         subCategoryString.put(ProductCategory.BERRY, "Bär");
         subCategoryString.put(ProductCategory.CITRUS_FRUIT, "Citrusfrukter");
         subCategoryString.put(ProductCategory.HOT_DRINKS, "Varm dryck");
@@ -93,23 +93,23 @@ public class categoryHandler {
         return VegCategoryProducts;
     }
 
-    public String mainToString(Product p){
-        if(VegCategoryProducts.contains(p)){
+    public String mainToString(Product p) {
+        if (VegCategoryProducts.contains(p)) {
             return "Frukt & Grönt";
         }
-        if(MeatCategoryProducts.contains(p)){
+        if (MeatCategoryProducts.contains(p)) {
             return "Kött & Fisk";
         }
-        if(DairyCategoryProducts.contains(p)){
+        if (DairyCategoryProducts.contains(p)) {
             return "Mejeri";
         }
-        if(PantryCategoryProducts.contains(p)){
+        if (PantryCategoryProducts.contains(p)) {
             return "Skafferi";
         }
         return "Dryck";
     }
 
-    public String subToString(Product p){
+    public String subToString(Product p) {
         return subCategoryString.get(p.getCategory());
     }
 
@@ -122,7 +122,7 @@ public class categoryHandler {
         return null;
     }
 
-    public List<Product> getProductsFromName(String name){
+    public List<Product> getProductsFromName(String name) {
         switch (name) {
             case "Alla Produkter":
                 return db.getProducts();
@@ -141,4 +141,20 @@ public class categoryHandler {
         }
     }
 
+    public String[] getAllMainStrings(){
+        String[] mains = {"Alla Produkter", "Frukt & Grönt", "Mejeri", "Kött & Fisk", "Skafferi", "Dryck"};
+        return mains;
+    }
+
+    public String[] getAllSubStrings() {
+        String[] subs = new String[21];
+        int i = 0;
+        for (String sub : subCategoryString.values()){
+            subs[i] = sub;
+            i++;
+        }
+        return subs;
+    }
 }
+
+

@@ -1,0 +1,57 @@
+.circleDone{
+    -fx-fill: rgba(148, 148, 148, 0.75);
+    -fx-border-size: 2px;
+    -fx-border-color: black;
+}
+
+.circleNotDone{
+    -fx-fill: rgba(255, 255, 255, 0.75);
+    -fx-border-size: 2px;
+    -fx-border-color: black;
+}
+
+.circleCurrent{
+    -fx-fill: rgba(0, 0, 160, 0.75);
+    -fx-border-size: 2px;
+    -fx-border-color: blue;
+}
+
+.textCurrent{
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+}
+
+.textCurrent:hover{
+    -fx-font-size: 22px;
+}
+
+.textNotCurrent{
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+}
+
+.textNotCurrent:hover{
+    -fx-font-size: 22px;
+}
+
+.doneButton{
+    -fx-background-radius: 40px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #404040;
+    -fx-font-size: 18px;
+    -fx-border-width: 2px;
+    -fx-background-color: #f0f0f0;
+}
+
+.labelTxt{
+    -fx-font-family: Cambria;
+    -fx-font-size: 22 px;
+    -fx-text-alignment: right;
+}
+
+.labelPane{
+    -fx-vgap: 40px;
+}
+

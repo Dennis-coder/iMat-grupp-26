@@ -16,11 +16,12 @@
 
 .search-button:hover{
     -fx-background-color: #c0c0c0;
+    -fx-cursor: pointer;
 }
 
 .imatButton{
-    -fx-background-radius: 999px;
-    -fx-border-radius: 999px;
+    -fx-background-radius: 60px;
+    -fx-border-radius: 45px;
     -fx-border-color: #404040;
     -fx-border-width: 2px;
     -fx-background-color: #f0f0f0;
@@ -28,6 +29,7 @@
 
 .imatButton:hover{
     -fx-background-color: #c0c0c0;
+    -fx-cursor: HAND;
 }
 
 .navButton{
@@ -51,7 +53,20 @@
     -fx-background-radius: 999px;
     -fx-border-radius: 999px;
     -fx-border-color: #404040;
-    -fx-border-width: 4px;
+    -fx-border-width: 2px;
     -fx-background-color: red;
 }
+
+.clickableText:hover{
+    -fx-text-fill: #c0c0c0;
+    -fx-underline: true;
+}
+
+.paymentPane{
+    -fx-background-color: White;
+    -fx-border-width: 3px;
+    -fx-border-color: Black;
+}
+
+
 

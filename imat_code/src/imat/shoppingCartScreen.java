@@ -117,5 +117,10 @@ public class shoppingCartScreen extends AnchorPane {
         parentController.closeShoppingCartScreen();
     }
 
+    @FXML
+    public void toWizard(){
+        parentController.toWizard();
+    }
+
 
 }

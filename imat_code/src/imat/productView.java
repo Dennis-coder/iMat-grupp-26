@@ -54,7 +54,7 @@ public class productView extends AnchorPane {
     int currentVal;
     Timeline beat;
     SimpleDoubleProperty scale = new SimpleDoubleProperty(1);
-    boolean favourite = false;
+
 
     public productView(Product product, int currentVal, iMatController parentController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/productView.fxml"));
@@ -70,7 +70,6 @@ public class productView extends AnchorPane {
         this.parentController = parentController;
         this.product = product;
         this.currentVal = currentVal;
-
         populateProductViewScreen();
     }
 
@@ -82,12 +81,13 @@ public class productView extends AnchorPane {
         viewScreenUnit.setText(product.getUnit());
         viewScreenPriceUnit.setText(product.getPrice() + " " + product.getUnit());
         viewScreenAmountSelect.getItems().clear();
+        getBeat();
         initializeComboBox();
         setBreadCrumbs();
         if (product.isEcological()) {
             viewScreenEkoPicture.setVisible(true);
         }
-        if (favourite) {
+        if (db.isFavorite(product)) {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heartFilled.png"));
         }
     }
@@ -143,10 +143,9 @@ public class productView extends AnchorPane {
 
     @FXML
     public void heartHover() {
-        if (favourite) {
+        if (db.isFavorite(product)) {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heart.png"));
         } else {
-            getBeat();
             viewScreenHeart.scaleYProperty().bind(scale);
             pulseAnimation();
         }
@@ -154,7 +153,7 @@ public class productView extends AnchorPane {
 
     @FXML
     public void heartHoverStopped() {
-        if (favourite) {
+        if (db.isFavorite(product)) {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heartFilled.png"));
         } else {
             scale.setValue(1);
@@ -164,15 +163,16 @@ public class productView extends AnchorPane {
 
     @FXML
     public void onClick() {
-        if (favourite){
+        if (db.isFavorite(product)){
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heart.png"));
+            parentController.removeFavorite(product);
         }
         else{
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heartFilled.png"));
+            parentController.addFavorite(product);
             scale.setValue(1);
             beat.stop();
         }
-        favourite = !favourite;
     }
 
 

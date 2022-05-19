@@ -57,12 +57,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="addedItemsTextField" alignment="CENTER" editable="false" layoutX="212.0" layoutY="41.0" prefHeight="39.0" prefWidth="200.0" text="Item(s) Added To Cart" visible="false">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <ImageView fx:id="viewScreenHeart" fitHeight="35.0" fitWidth="40.0" layoutX="472.0" layoutY="48.0" onMouseClicked="#onClick" onMouseEntered="#heartHover" onMouseExited="#heartHoverStopped" pickOnBounds="true">
+      <ImageView fx:id="viewScreenHeart" fitHeight="57.0" fitWidth="62.0" layoutX="417.0" layoutY="48.0" onMouseClicked="#onClick" onMouseEntered="#heartHover" onMouseExited="#heartHoverStopped" pickOnBounds="true">
          <image>
             <Image url="@../resources/imgs/heart.png" />
          </image>
@@ -71,5 +66,10 @@
          </cursor>
       </ImageView>
       <FlowPane fx:id="BreadCrumbPane" layoutX="95.0" layoutY="16.0" prefHeight="30.0" prefWidth="384.0" />
+      <TextField fx:id="addedItemsTextField" alignment="CENTER" editable="false" layoutX="142.0" layoutY="41.0" prefHeight="39.0" prefWidth="315.0" text="Produkt(er) thar lagts i din varukorg" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
    </children>
 </fx:root>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-
-
 <?import javafx.scene.text.Font?>
-<fx:root xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" type="AnchorPane">
+
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="label" onMouseClicked="#onClick" onMouseEntered="#onHover" onMouseExited="#onHoverStopped" text="Label">
          <font>
@@ -13,4 +13,7 @@
          </font>
       </Label>
    </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </fx:root>

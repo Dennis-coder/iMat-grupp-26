@@ -22,7 +22,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="clearCartConfirmationScreen" prefHeight="620.0" prefWidth="1020.0" style="-fx-background-color: rgba(0, 0, 0.75) rgba(0, 0, 0, 0.75);">
+      <AnchorPane fx:id="clearCartConfirmationScreen" prefHeight="620.0" prefWidth="1020.0" style="-fx-background-color: rgba(0, 0, 0, 0.7);">
          <children>
             <AnchorPane layoutX="287.0" layoutY="141.0" prefHeight="337.0" prefWidth="446.0" style="-fx-background-color: white;">
                <children>
@@ -42,14 +42,14 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-    <AnchorPane layoutX="459.0" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="575.0">
+    <AnchorPane layoutX="459.0" minHeight="0.0" minWidth="0.0" prefHeight="620.0" prefWidth="560.0">
          <children>
-            <ScrollPane hbarPolicy="NEVER" layoutY="77.0" prefHeight="543.0" prefWidth="575.0" vbarPolicy="ALWAYS">
+            <ScrollPane hbarPolicy="NEVER" layoutY="77.0" prefHeight="543.0" prefWidth="560.0" vbarPolicy="ALWAYS">
                <content>
-                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="560.0" />
+                  <FlowPane fx:id="itemsFlowPane" prefHeight="620.0" prefWidth="543.0" />
                </content>
             </ScrollPane>
-            <Label fx:id="pa" alignment="CENTER" contentDisplay="CENTER" prefHeight="77.0" prefWidth="575.0" style="-fx-background-color: rgba(150,150,150,1);" text="Dina Varor" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="77.0" prefWidth="560.0" style="-fx-background-color: navy;" text="Dina Varor" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Franklin Gothic Demi Cond" size="30.0" />
                </font>
@@ -65,7 +65,7 @@
                </image>
             </ImageView>
             <Pane layoutX="456.0" prefHeight="620.0" prefWidth="4.0" style="-fx-background-color: black;" />
-            <Button layoutX="347.0" layoutY="459.0" mnemonicParsing="false" text="Till Kassa" />
+            <Button layoutX="347.0" layoutY="459.0" mnemonicParsing="false" onAction="#toWizard" text="Till Kassa" />
             <Button layoutX="237.0" layoutY="459.0" mnemonicParsing="false" onAction="#clearCartPressed" text="Rensa Varukorg" />
             <TextArea fx:id="itemListTextArea" editable="false" focusTraversable="false" layoutX="23.0" layoutY="158.0" prefHeight="289.0" prefWidth="387.0" style="overflow:hidden">
                <font>

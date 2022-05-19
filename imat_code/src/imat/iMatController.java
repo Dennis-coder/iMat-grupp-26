@@ -17,9 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -29,14 +27,28 @@ import se.chalmers.cse.dat216.project.*;
 
 public class iMatController implements Initializable {
 
-    iMatBackendController iMatBackendController = new iMatBackendController();
     IMatDataHandler db = IMatDataHandler.getInstance();
     Map<Integer, productDisplayItem> productDisplayMap = new HashMap<>();
+    Map<Integer, productDisplayItem> favoriteDisplayMap = new HashMap<>();
     Map<Integer, shoppingCartItemCard> shoppingItemsMap = new HashMap<>();
+
     categoryHandler categories = categoryHandler.getInstance();
     SimpleDoubleProperty scale = new SimpleDoubleProperty(1);
     Timeline beat = this.getBeat();
 
+    @FXML
+    Pane fruitButton;
+    @FXML
+    Pane startButton;
+    @FXML
+    Pane dairyButton;
+    @FXML
+    Pane meatButton;
+    @FXML
+    Pane pantryButton;
+    @FXML
+    Pane drinksButton;
+    Pane[] navButtons = {fruitButton, startButton, meatButton, pantryButton, dairyButton, drinksButton};
     @FXML
     AnchorPane accountDetail;
     @FXML
@@ -59,8 +71,10 @@ public class iMatController implements Initializable {
     Label pantryLabel;
     @FXML
     Label drinksLabel;
+    Label[] navLabels = {fruitLabel, meatLabel, dairyLabel, pantryLabel, drinksLabel, startLabel};
+
     @FXML
-    FlowPane productScreen;
+    FlowPane favoriteScreen;
     @FXML
     AnchorPane productViewScreen;
     @FXML
@@ -95,8 +109,6 @@ public class iMatController implements Initializable {
     TextField email;
     @FXML
     TextField address;
-
-    Customer customer;
     @FXML
     Label skapa;
     @FXML
@@ -107,6 +119,8 @@ public class iMatController implements Initializable {
     Pane createdSuccessfully;
     @FXML
     Label editLabel;
+    @FXML
+    Label nameLabel;
 
     @FXML
     ImageView profilePicOne;
@@ -119,21 +133,37 @@ public class iMatController implements Initializable {
     @FXML
     Label arrow;
     @FXML
-    TextArea mainTextAreaProfile;
+    TextField searchBar;
+    @FXML
+    Label suggestionLabel;
+    @FXML
+    FlowPane suggestionPane;
+    @FXML
+    AnchorPane firstTimePane;
+    @FXML
+    AnchorPane notLoggedIn;
+    @FXML
+    AnchorPane profilePicPane1;
+    @FXML
+    FlowPane editScreen;
+    @FXML
+    FlowPane paymentPane;
+    @FXML
+    FlowPane wizardHolder;
 
+    paymentMethodCreate PMC = new paymentMethodCreate(this);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        db.reset();
         for (Product product : db.getProducts()) {
             productDisplayItem dispItem = new productDisplayItem(product, this);
             productDisplayMap.put(product.getProductId(), dispItem);
             shoppingCartItemCard SCI = new shoppingCartItemCard(product, this);
             shoppingItemsMap.put(product.getProductId(), SCI);
         }
-        if (db.isFirstRun()) {
-            firstTimeScreen.toFront();
-        }
-        populateProductScreen();
+
+        //populateProductScreen();
         db.getShoppingCart().addShoppingCartListener(scl);
         if (db.getShoppingCart().getItems().size() != 0) {
             db.getShoppingCart().fireShoppingCartChanged(db.getShoppingCart().getItems().get(0), false);
@@ -142,13 +172,64 @@ public class iMatController implements Initializable {
 
     @FXML
     public void toAccount() {
+        if (paymentPane.getChildren().isEmpty()){
+            paymentPane.getChildren().add(PMC);
+        }
+        PMC.displayScreen.toFront();
+        updateAccountText();
         accountDetail.toFront();
+        if (!db.isCustomerComplete()) {
+            notLoggedIn.toFront();
+        } else {
+            notLoggedIn.toBack();
+        }
     }
 
     @FXML
     public void toHomepage() {
         home.toFront();
+        clearFills();
+        fillBackground(startButton, startLabel);
         startScreen.toFront();
+
+    }
+
+    @FXML
+    public void toCreate() {
+        firstTimeScreen.toFront();
+        firstTimePane.toBack();
+    }
+
+    @FXML
+    public void keepBrowsing() {
+        accountDetail.toBack();
+    }
+
+    public void addFavorite(Product product) {
+        productDisplayItem disp = new productDisplayItem(product, this);
+        disp.becameFavorite();
+        favoriteDisplayMap.put(product.getProductId(), disp);
+        favoriteScreen.getChildren().add(disp);
+        productDisplayMap.get(product.getProductId()).becameFavorite();
+        db.favorites().add(product);
+    }
+
+    public void removeFavorite(Product product) {
+        favoriteScreen.getChildren().remove(favoriteDisplayMap.get(product.getProductId()));
+        productDisplayMap.get(product.getProductId()).removedFavorite();
+        db.favorites().remove(product);
+    }
+
+    public void fillBackground(Pane pane, Label label) {
+        Background background = new Background(new BackgroundFill(Color.NAVY, null, null));
+        pane.setBackground(background);
+        label.setTextFill(Color.WHITE);
+    }
+
+    public void stopFill(Pane pane, Label label) {
+        Background background = new Background(new BackgroundFill(Color.WHITE, null, null));
+        pane.setBackground(background);
+        label.setTextFill(Color.BLACK);
     }
 
     @FXML
@@ -230,12 +311,12 @@ public class iMatController implements Initializable {
         mouseExitedCategoryButton(drinksLabel);
     }
 
-    @FXML
+    /* @FXML
     public void populateProductScreen() {
-        for (Product p : db.getProducts()) {
-            productScreen.getChildren().add(productDisplayMap.get(p.getProductId()));
+        for (Product p : db.favorites()) {
+            favoriteScreen.getChildren().add(productDisplayMap.get(p.getProductId()));
         }
-    }
+    }*/
 
 
     public void openProductViewScreen(Product product, int currentVal) {
@@ -249,7 +330,6 @@ public class iMatController implements Initializable {
         if (shoppingCartHolder.getChildren().isEmpty()) {
             productViewHolder.getChildren().clear();
             productViewScreen.toBack();
-            System.out.println(productViewHolder.getChildren().isEmpty());
         } else {
             shoppingCartScreen.getInstance(this).singltemAnchorPane.toBack();
         }
@@ -271,7 +351,7 @@ public class iMatController implements Initializable {
             if (itemsInCart != 0) {
                 shoppingCartCurrentItems.setVisible(true);
                 shoppingCartCircle.setVisible(true);
-                shoppingCartCurrentItems.setText(String.valueOf(itemsInCart));
+                shoppingCartCurrentItems.setText(String.valueOf(db.getShoppingCart().getItems().size()));
             } else {
                 shoppingCartCurrentItems.setVisible(false);
                 shoppingCartCircle.setVisible(false);
@@ -320,14 +400,15 @@ public class iMatController implements Initializable {
         new Thread(sleeper).start();
     }
 
-    private void setSmall(){
+    private void setSmall() {
         rect.setWidth(50);
         rect.setLayoutX(566);
         this.arrow.setText("<--");
         arrow.setPrefWidth(50);
         arrow.setLayoutX(566);
     }
-    private void setLarge(){
+
+    private void setLarge() {
         rect.setWidth(65);
         rect.setLayoutX(546);
         this.arrow.setText("<-----");
@@ -336,10 +417,10 @@ public class iMatController implements Initializable {
     }
 
     Timeline getBeat() {
-        if (beat == null){
-        this.beat = new Timeline(
-                new KeyFrame(Duration.ZERO, event -> setSmall()),
-                new KeyFrame(Duration.seconds(0.5), event -> setLarge()));
+        if (beat == null) {
+            this.beat = new Timeline(
+                    new KeyFrame(Duration.ZERO, event -> setSmall()),
+                    new KeyFrame(Duration.seconds(0.5), event -> setLarge()));
         }
         return this.beat;
     }
@@ -353,26 +434,26 @@ public class iMatController implements Initializable {
     }
 
     @FXML
-    public void onHoverRect(){
+    public void onHoverRect() {
         getBeat();
         pulseAnimation();
     }
 
     @FXML
-    public void rectHoverStopped(){
+    public void rectHoverStopped() {
         setSmall();
         this.beat.stop();
     }
 
     @FXML
-    public void closeProfilePicPane(){
+    public void closeProfilePicPane() {
         rect.setVisible(true);
         arrow.setVisible(true);
         profilePicPane.setVisible(false);
     }
 
     @FXML
-    public void openProfilePicPane(){
+    public void openProfilePicPane() {
         rect.setVisible(false);
         arrow.setVisible(false);
         this.beat.stop();
@@ -380,44 +461,111 @@ public class iMatController implements Initializable {
         profilePicPane.setVisible(true);
     }
 
+    @FXML
+    public void openProfilePicPane1() {
+        profilePicPane1.setVisible(true);
+    }
+
+    @FXML
+    public void closeProfilePicPane1() {
+        profilePicPane1.setVisible(false);
+    }
+
+    private void clearFills() {
+        stopFill(startButton, startLabel);
+        stopFill(fruitButton, fruitLabel);
+        stopFill(meatButton, meatLabel);
+        stopFill(dairyButton, dairyLabel);
+        stopFill(pantryButton, pantryLabel);
+        stopFill(drinksButton, drinksLabel);
+    }
+
+    private void setFillFromString(String s){
+        switch (s){
+            case "Frukt & Grönt":
+               fillBackground(fruitButton, fruitLabel);
+               break;
+            case "Mejeri":
+                fillBackground(dairyButton, dairyLabel);
+                break;
+            case "Kött & Fisk":
+                fillBackground(meatButton, meatLabel);
+                break;
+            case "Skafferi":
+                fillBackground(pantryButton, pantryLabel);
+                break;
+            case "Dryck":
+                fillBackground(drinksButton, drinksLabel);
+                break;
+
+        }
+    }
+
+
     public void displayCategory(List<Product> products) {
-        hitsFlowPane.getChildren().clear();
-        breadCrumbPane.getChildren().clear();
-        shoppingCartHolder.getChildren().clear();
+        clearHits();
+        clearFills();
         updateSearchScreenLabel(products);
+        delay(8, () -> breadCrumbPane.setLayoutX(searchScreenLabel.getLayoutBounds().getWidth() + 10));
         for (Product product : products) {
             hitsFlowPane.getChildren().add(productDisplayMap.get(product.getProductId()));
         }
-        delay(4, () -> breadCrumbPane.setLayoutX(searchScreenLabel.getLayoutBounds().getWidth() + 10));
-
+        if(products.size() < 100){
+            setFillFromString(categories.mainToString(products.get(0)));
+        }
         home.toFront();
+
         searchScreen.toFront();
     }
 
+    private void clearHits() {
+        hitsFlowPane.getChildren().clear();
+        breadCrumbPane.getChildren().clear();
+        shoppingCartHolder.getChildren().clear();
+        suggestionPane.setVisible(false);
+    }
+
+    @FXML
+    public void startEditScreen() {
+        editScreen.getChildren().add(new EditAccountScreen(this));
+        editLabel.setDisable(true);
+    }
+
+    @FXML
+    public void stopEditScreen() {
+        updateAccountText();
+        editScreen.getChildren().clear();
+        editLabel.setDisable(false);
+    }
 
     @FXML
     public void displayCatVeg() {
         displayCategory(categories.getVegCategoryProducts());
+        fillBackground(fruitButton, fruitLabel);
     }
 
     @FXML
     public void displayCatMeat() {
         displayCategory(categories.getMeatCategoryProducts());
+        fillBackground(meatButton, meatLabel);
     }
 
     @FXML
     public void displayCatDairy() {
         displayCategory(categories.getDairyCategoryProducts());
+        fillBackground(dairyButton, dairyLabel);
     }
 
     @FXML
     public void displayCatDrinks() {
         displayCategory(categories.getDrinksCategoryProducts());
+        fillBackground(drinksButton, drinksLabel);
     }
 
     @FXML
     public void displayCatPantry() {
         displayCategory(categories.getPantryCategoryProducts());
+        fillBackground(pantryButton, pantryLabel);
     }
 
     public void updateSearchScreenLabel(List<Product> products) {
@@ -462,38 +610,25 @@ public class iMatController implements Initializable {
         skipLabel.setUnderline(false);
     }
 
+
     @FXML
     private void onHoverSkipStop() {
         onHoverStop(skipLabel);
     }
 
     @FXML
-    private void onHoverSkip(){
+    private void onHoverSkip() {
         onHover(skipLabel);
     }
 
     @FXML
-    private void onHoverSkapa(){
+    private void onHoverSkapa() {
         onHover(skapa);
     }
 
     @FXML
-    private void onHoverSkapaStop(){
+    private void onHoverSkapaStop() {
         onHoverStop(skapa);
-    }
-
-
-
-
-    @FXML
-    private void onHoverDark(){
-        editLabel.setTextFill(Color.rgb(50, 50, 50, 0.7));
-        editLabel.setUnderline(true);
-    }
-    @FXML
-    private void onHoverDarkStop(){
-        editLabel.setTextFill(Color.rgb(0, 0, 0, 1));
-        editLabel.setUnderline(true);
     }
 
     @FXML
@@ -503,19 +638,18 @@ public class iMatController implements Initializable {
 
     @FXML
     private void goToCreateAccount() {
-        if(firstTimeTextField.getText() != ""){
+        if (!Objects.equals(firstTimeTextField.getText(), "")) {
             db.getCustomer().setLastName(firstTimeTextField.getText());
             lastName.setText(firstTimeTextField.getText());
             firstTimeTextField.getParent().toBack();
-        }
-        else {
+        } else {
             errorLabel.setVisible(true);
-            delay(2000, ()-> errorLabel.setVisible(false));
+            delay(2000, () -> errorLabel.setVisible(false));
         }
     }
 
     @FXML
-    private void createAccount(){
+    private void createAccount() {
         setTextField(firstName);
         setTextField(lastName);
         setTextField(address);
@@ -525,16 +659,15 @@ public class iMatController implements Initializable {
     }
 
     private void setTextField(TextField textField) {
-        if (textField.getText() != "") {
+        if (!Objects.equals(textField.getText(), "")) {
             setTextFieldSwitch(textField.getId(), textField.getText());
             textField.toBack();
-        } else{
-            db.getCustomer().setFirstName("");
+        } else {
             textField.toFront();
         }
     }
 
-    private void setTextFieldSwitch(String id, String text){
+    private void setTextFieldSwitch(String id, String text) {
         switch (id) {
             case "firstName":
                 db.getCustomer().setFirstName(text);
@@ -544,6 +677,7 @@ public class iMatController implements Initializable {
                 break;
             case "address":
                 db.getCustomer().setPostAddress(text);
+                db.getCustomer().setAddress(text);
                 break;
             case "postCode":
                 db.getCustomer().setPostCode(text);
@@ -558,8 +692,9 @@ public class iMatController implements Initializable {
     }
 
     @FXML
-    private void createAccountPressed(){
-        if (db.isCustomerComplete()){
+    private void createAccountPressed() {
+        createAccount();
+        if (db.isCustomerComplete()) {
             firstTimeScreen.toBack();
             menuPane.toFront();
             updateAccountText();
@@ -567,25 +702,28 @@ public class iMatController implements Initializable {
             createdSuccessfully.toFront();
             delay(4000, () -> createdSuccessfully.setVisible(false));
             createdSuccessfully.toBack();
-        }
-        else{
+        } else {
             errorLabel.setVisible(true);
-            delay(2000, ()-> errorLabel.setVisible(false));
+            delay(2000, () -> errorLabel.setVisible(false));
         }
     }
 
     private void updateAccountText() {
-        mainTextAreaProfile.clear();
-        mainTextAreaProfile.setText("Förnamn:  " + "\n\n" +
-                "Efternamn:  " + "\n\n" + "Adress:"   + "\n\n" + "Telefon:  " + "\n\n"
-                + "Email:  " + "\n\n" + "Postnummer:  " + "\n\n");
+        userTextLabel.setText(db.getCustomer().getFirstName() + "\n\n" +
+                db.getCustomer().getLastName() + "\n\n" + db.getCustomer().getAddress() + "\n\n" +
+                db.getCustomer().getPhoneNumber() + "\n\n"
+                + db.getCustomer().getEmail() + "\n\n" + db.getCustomer().getPostCode() + "\n\n");
+
+        nameLabel.setText(db.getCustomer().getFirstName() + " " + db.getCustomer().getLastName());
     }
 
     @FXML
     AnchorPane profilePicPane;
+    @FXML
+    Label userTextLabel;
 
     @FXML
-    public void pickOwl(){
+    public void pickOwl() {
         Image owl = new Image("/imat/resources/imgs/owl.png");
         profilePicOne.setImage(owl);
         profilePicTwo.setImage(owl);
@@ -593,7 +731,7 @@ public class iMatController implements Initializable {
     }
 
     @FXML
-    public void pickMonkey(){
+    public void pickMonkey() {
         Image monkey = new Image("/imat/resources/imgs/monkey.png");
         profilePicOne.setImage(monkey);
         profilePicTwo.setImage(monkey);
@@ -601,20 +739,107 @@ public class iMatController implements Initializable {
     }
 
     @FXML
-    public void pickPenguin(){
+    public void pickPenguin() {
         Image penguin = new Image("/imat/resources/imgs/penguin.png");
         profilePicOne.setImage(penguin);
         profilePicTwo.setImage(penguin);
         profilePicThree.setImage(penguin);
     }
 
+    @FXML
+    public void search() {
+        displaySearch(searchBar.getText());
+    }
 
+    public void displaySearch(String searched) {
+        clearHits();
 
+        List<Product> itemsFound = new ArrayList<>();
 
+        for (Product p : db.getProducts()) {
+            if (almostEqual(p.getName(), searched, false) || almostEqual(categories.subToString(p), searched, false) ||
+                    almostEqual(categories.mainToString(p), searched, false)) {
+                itemsFound.add(p);
+            }
+        }
+        if (!itemsFound.isEmpty()) {
+            for (Product p : itemsFound) {
+                hitsFlowPane.getChildren().add(productDisplayMap.get(p.getProductId()));
+            }
+            searchScreenLabel.setText("Sökning " + searched + " gav:");
+            setSuggestionLabel(searched);
 
+        } else {
+            searchScreenLabel.setText("Sökning på " + searched + " gav tyvärr inga resultat");
+            setSuggestionLabel(searched);
+        }
+        home.toFront();
+        searchScreen.toFront();
+    }
 
+    private void setSuggestionLabel(String searched) {
+        if (!getSuggestion(searched).equals("")) {
+            delay(8, () -> suggestionPane.setLayoutX(searchScreenLabel.getLayoutBounds().getWidth() + 30));
+            suggestionPane.setVisible(true);
+            suggestionLabel.setText(getSuggestion(searched));
+        }
+    }
 
+    private boolean almostEqual(String one, String two, Boolean generous) {
+        int equalChars = 0;
+        if (generous) {
+            equalChars = 1;
+        }
+        int shorter = Math.min(one.length(), two.length());
+        for (int i = 0; i < shorter; i++) {
+            if (one.toLowerCase().charAt(i) == two.toLowerCase().charAt(i)) {
+                equalChars++;
+            }
+        }
+        if (shorter < 4) {
+            return equalChars == shorter;
+        }
+        if (shorter < 6) {
+            return (shorter - 1) <= equalChars;
+        } else {
+            return (shorter - 2) <= equalChars;
+        }
+    }
 
+    @FXML
+    private void suggestionClicked() {
+        System.out.println(suggestionLabel.getText());
+        displaySearch(suggestionLabel.getText());
+    }
+
+    private String getSuggestion(String searched) {
+        if (!findSuggestion(searched, categories.getAllSubStrings()).equals("")) {
+            return findSuggestion(searched, categories.getAllSubStrings());
+        }
+        if (!findSuggestion(searched, categories.getAllMainStrings()).equals("")) {
+            return findSuggestion(searched, categories.getAllMainStrings());
+        }
+        return "";
+    }
+
+    private String findSuggestion(String searched, String[] options) {
+        if (searched.length() > 2) {
+            for (String main : options) {
+                if (Math.abs(searched.length() - main.length()) <= 3) {
+                    if (almostEqual(main, searched, true) && !searched.equalsIgnoreCase(main)) {
+                        return main;
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+    public void toWizard() {
+        wizardHolder.getChildren().add( Wizard.getInstance());
+        wizardHolder.toFront();
+
+    }
 }
 
 
