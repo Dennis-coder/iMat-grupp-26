@@ -14,17 +14,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import se.chalmers.cse.dat216.project.IMatDataHandler;
-import se.chalmers.cse.dat216.project.Product;
-import se.chalmers.cse.dat216.project.ProductCategory;
+import se.chalmers.cse.dat216.project.*;
 
 import java.io.IOException;
 
 public class productView extends AnchorPane {
-    @FXML
-    Label viewScreenPriceOne;
+
     @FXML
     Label viewScreenPriceTwo;
     @FXML
@@ -45,6 +44,10 @@ public class productView extends AnchorPane {
     ImageView viewScreenHeart;
     @FXML
     FlowPane BreadCrumbPane;
+    @FXML
+    AnchorPane controlPane;
+    @FXML
+    Label inBasketLabel;
 
 
     IMatDataHandler db = IMatDataHandler.getInstance();
@@ -53,14 +56,28 @@ public class productView extends AnchorPane {
     Product product;
     int currentVal;
     Timeline beat;
+
     SimpleDoubleProperty scale = new SimpleDoubleProperty(1);
+    ShoppingCartListener scl = new ShoppingCartListener() {
+        @Override
+        public void shoppingCartChanged(CartEvent cartEvent) {
+            for (ShoppingItem SI : db.getShoppingCart().getItems()) {
+                if (SI.getProduct().equals(product)) {
+                    inBasketLabel.setVisible(true);
+                    inBasketLabel.setText(String.valueOf((int) SI.getAmount()) + "x");
+                    return;
+                }
+            }
+            inBasketLabel.setVisible(false);
+        }
+    };
 
 
     public productView(Product product, int currentVal, iMatController parentController) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/productView.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
-
+        db.getShoppingCart().addShoppingCartListener(scl);
 
         try {
             fxmlLoader.load();
@@ -75,12 +92,12 @@ public class productView extends AnchorPane {
 
     public void populateProductViewScreen() {
         viewScreenPicture.setImage(db.getFXImage(product, 400, 300));
-        viewScreenPriceOne.setText(product.getPrice() + ":-");
-        viewScreenPriceTwo.setText(product.getPrice() * currentVal + "kr");
+        viewScreenPriceTwo.setText(String.format("%.2f", product.getPrice() * currentVal) + "kr");
         viewScreenTitle.setText(product.getName());
         viewScreenUnit.setText(product.getUnit());
-        viewScreenPriceUnit.setText(product.getPrice() + " " + product.getUnit());
+        viewScreenPriceUnit.setText(String.format("%.2f", product.getPrice()) + " " + product.getUnit());
         viewScreenAmountSelect.getItems().clear();
+        colorCategory();
         getBeat();
         initializeComboBox();
         setBreadCrumbs();
@@ -94,8 +111,8 @@ public class productView extends AnchorPane {
 
     private void setBreadCrumbs() {
         BreadCrumbPane.getChildren().add(new BreadCrumb("Alla Produkter", false, parentController));
-        if (product.getCategory() == ProductCategory.DAIRIES){
-            BreadCrumbPane.getChildren().add(new BreadCrumb(ch.mainToString(product),true, parentController));
+        if (product.getCategory() == ProductCategory.DAIRIES) {
+            BreadCrumbPane.getChildren().add(new BreadCrumb(ch.mainToString(product), true, parentController));
             return;
         }
         BreadCrumbPane.getChildren().add(new BreadCrumb(ch.mainToString(product), false, parentController));
@@ -124,16 +141,17 @@ public class productView extends AnchorPane {
     public void addButtonPressed() throws InterruptedException {
         parentController.addItemToCart(product, currentVal);
         addedItemsTextField.setVisible(true);
+        addedItemsTextField.toFront();
         iMatController.delay(1000, () -> addedItemsTextField.setVisible(false));
     }
 
-    void getBeat(){
+    void getBeat() {
         this.beat = new Timeline(
                 new KeyFrame(Duration.ZERO, event -> scale.setValue(1)),
                 new KeyFrame(Duration.seconds(0.5), event -> scale.setValue(1.1)));
     }
 
-    private void pulseAnimation(){
+    private void pulseAnimation() {
         viewScreenHeart.scaleYProperty().bind(scale);
         viewScreenHeart.scaleXProperty().bind(scale);
         beat.setAutoReverse(true);
@@ -163,16 +181,19 @@ public class productView extends AnchorPane {
 
     @FXML
     public void onClick() {
-        if (db.isFavorite(product)){
+        if (db.isFavorite(product)) {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heart.png"));
             parentController.removeFavorite(product);
-        }
-        else{
+        } else {
             viewScreenHeart.setImage(new Image("imat/resources/imgs/heartFilled.png"));
             parentController.addFavorite(product);
             scale.setValue(1);
             beat.stop();
         }
+    }
+
+    private void colorCategory() {
+        parentController.colorCategory(controlPane, product);
     }
 
 

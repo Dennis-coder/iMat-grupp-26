@@ -75,7 +75,7 @@ public class shoppingCartScreen extends AnchorPane {
                     SI.getProduct().getName() + " x" + (int)SI.getAmount());
             itemPricesTextArea.setText(itemPricesTextArea.getText() + "\n\n" + String.format("%.2f", SI.getTotal()) + "kr");
         }
-        totalPriceLabel.setText(String.format("%.2f", db.getShoppingCart().getTotal()) + ":-");
+        totalPriceLabel.setText(String.format("%.2f", db.getShoppingCart().getTotal()) + ":- *");
     }
 
     ShoppingCartListener scl = new ShoppingCartListener() {

@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class paymentMethod extends AnchorPane {
     @FXML
@@ -16,15 +17,21 @@ public class paymentMethod extends AnchorPane {
     @FXML
     Label name;
     @FXML
-    Label bank;
+    Label cvv;
     @FXML
     Label type;
     @FXML
     Label number;
+    String date;
+    String day;
+    String month;
+    String year;
+    String cvvNum;
 
     paymentMethodCreate parentController;
 
-    public paymentMethod(String type, String name, String bank, String number, paymentMethodCreate parentController){
+    public paymentMethod(String type, String name, String cvv, String number, String day,
+                         String month, String year, paymentMethodCreate parentController){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/paymentMethod.fxml"));
         fxmlLoader.setController(this);
         fxmlLoader.setRoot(this);
@@ -36,11 +43,36 @@ public class paymentMethod extends AnchorPane {
         }
 
         this.parentController = parentController;
+        setTypeText(type);
         this.type.setText(type);
         this.name.setText(name);
-        this.bank.setText(bank);
+        this.cvv.setText("CVV: ***");
+        this.cvvNum = cvv;
         this.number.setText(number);
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.date = day + " / " + month + " - "+ year;
         setImg(type);
+    }
+
+    private void setTypeText(String type) {
+        if (Objects.equals(type, "Annan")){
+            this.type.setText("Kreditkort");
+        }
+        else {
+            this.type.setText(type);
+        }
+    }
+
+    @FXML
+    public void cvvHover(){
+        cvv.setText("CVV: " + cvvNum);
+    }
+
+    @FXML
+    public void cvvHoverStopped(){
+        cvv.setText("CVV: ***");
     }
 
     private void setImg(String type){
@@ -51,8 +83,8 @@ public class paymentMethod extends AnchorPane {
             case "Visa":
                 picture.setImage(new Image("/imat/resources/imgs/visa.png"));
                 break;
-            case "Swish":
-                picture.setImage(new Image("/imat/resources/imgs/swish.png"));
+            case "Annan":
+                picture.setImage(new Image("/imat/resources/imgs/card.png"));
         }
     }
 

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="200.0" prefWidth="187.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="200.0" prefWidth="211.0" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="prize" layoutX="12.0" layoutY="140.0" prefHeight="35.0" prefWidth="107.0" text="Pris">
          <font>
@@ -19,8 +19,8 @@
          </font>
       </Label>
       <Label fx:id="prizePerUnit" layoutX="12.0" layoutY="168.0" prefHeight="17.0" prefWidth="61.0" text="Jmf Pris/kg" textFill="#000000ba" />
-      <ComboBox fx:id="amountSelect" editable="true" layoutX="142.0" layoutY="145.0" prefHeight="25.0" prefWidth="75.0" promptText="Antal" />
-      <Button fx:id="addButton" layoutX="95.0" layoutY="145.0" mnemonicParsing="false" onAction="#addButtonPressed" prefHeight="25.0" prefWidth="40.0" text="Köp">
+      <ComboBox fx:id="amountSelect" editable="true" layoutX="142.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="75.0" promptText="Antal" />
+      <Button fx:id="addButton" layoutX="95.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#addButtonPressed" prefWidth="40.0" text="Köp">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -53,10 +53,20 @@
          <font>
             <Font size="13.0" />
          </font></TextField>
-      <ImageView fx:id="heartImg" fitHeight="35.0" fitWidth="40.0" layoutX="145.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="heartImg" fitHeight="59.0" fitWidth="61.0" layoutX="149.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../resources/imgs/heartFilled.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="basketImg" fitHeight="35.0" fitWidth="47.0" layoutX="174.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../resources/imgs/shopping_cart.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="amountText" alignment="CENTER" layoutX="168.0" layoutY="58.0" prefHeight="27.0" prefWidth="47.0" text="hi" textAlignment="CENTER" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </fx:root>

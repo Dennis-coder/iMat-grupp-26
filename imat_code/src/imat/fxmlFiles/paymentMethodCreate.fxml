@@ -4,44 +4,22 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="350.0" stylesheets="@../cssFiles/paymentMethod.css" type="StackPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="325.0" styleClass="paymentFlowPane" stylesheets="@../cssFiles/paymentMethod.css" type="StackPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="createScreen" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="displayScreen" prefWidth="312.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="18.0" layoutY="14.0" text="Lägg till betalningsmetod">
-               <font>
-                  <Font name="Arial Black" size="18.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="typeComboTwo" disable="true" layoutX="120.0" layoutY="58.0" prefHeight="25.0" prefWidth="149.0" />
-            <Label layoutX="77.0" layoutY="60.0" styleClass="createTxt" text="Typ:">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="numberLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="5.0" layoutY="105.0" prefHeight="22.0" prefWidth="105.0" styleClass="createTxt" text="Nummer/ID:" />
-            <TextField fx:id="numberTextField" layoutX="120.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
-            <Label layoutX="66.0" layoutY="150.0" styleClass="createTxt" text="Bank:" />
-            <Label layoutX="60.0" layoutY="195.0" styleClass="createTxt" text="Namn:" />
-            <TextField fx:id="nameTextField" layoutX="120.0" layoutY="194.0" />
-            <Button fx:id="addButton" layoutX="211.0" layoutY="237.0" mnemonicParsing="false" onAction="#addButtonPressed" text="Lägg till" />
-            <ComboBox fx:id="bankCombo" layoutX="120.0" layoutY="148.0" prefHeight="25.0" prefWidth="149.0" />
-            <Button layoutX="149.0" layoutY="237.0" mnemonicParsing="false" onAction="#cancelCreate" text="Ångra" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="displayScreen" prefWidth="300.0" style="-fx-background-color: white;">
-         <children>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="300.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="300.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <FlowPane fx:id="paymentMethodPane" prefHeight="800.0" prefWidth="318.0" styleClass="paymentFlowPane">
+                  <FlowPane fx:id="paymentMethodPane" prefHeight="800.0" prefWidth="300.0" styleClass="paymentFlowPane">
                      <children>
-                        <Label fx:id="emptyLabel" prefHeight="90.0" prefWidth="249.0" styleClass="createTxtLrg" text="Här var det tomt! Vill du lägga till en betalningsmetod?" textAlignment="CENTER" wrapText="true">
+                        <Label fx:id="emptyLabel" prefHeight="90.0" prefWidth="300.0" styleClass="createTxtLrg" text="Här var det tomt! Vill du lägga till en betalningsmetod?" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -61,6 +39,48 @@
                   </FlowPane>
                </content>
             </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="createScreen" prefHeight="300.0" prefWidth="317.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="18.0" layoutY="14.0" text="Lägg till betalningsmetod">
+               <font>
+                  <Font name="Arial Black" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="typeComboTwo" layoutX="120.0" layoutY="58.0" prefHeight="25.0" prefWidth="149.0" />
+            <Label layoutX="77.0" layoutY="60.0" styleClass="createTxt" text="Typ:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="numberLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="5.0" layoutY="105.0" prefHeight="22.0" prefWidth="105.0" styleClass="createTxt" text="Nummer/ID:" />
+            <TextField fx:id="numberTextField" layoutX="120.0" layoutY="105.0" prefHeight="25.0" prefWidth="149.0" />
+            <Label layoutX="66.0" layoutY="150.0" styleClass="createTxt" text="CVV:" />
+            <Label layoutX="60.0" layoutY="195.0" styleClass="createTxt" text="Namn:" />
+            <TextField fx:id="nameTextField" layoutX="120.0" layoutY="194.0" />
+            <Button fx:id="addButton" layoutX="213.0" layoutY="260.0" mnemonicParsing="false" onAction="#addButtonPressed" text="Lägg till" />
+            <Button layoutX="151.0" layoutY="260.0" mnemonicParsing="false" onAction="#cancelCreate" text="Ångra" />
+            <TextField fx:id="cvvTextField" layoutX="120.0" layoutY="150.0" />
+            <TextArea fx:id="errorCreate" editable="false" layoutX="49.0" layoutY="14.0" prefHeight="113.0" prefWidth="275.0" text="Alla fält måste vara ifyllda och CVV accepterar endast 3-siffriga koder" visible="false" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextArea>
+            <Label layoutX="33.0" layoutY="231.0" styleClass="createTxt" text="Giltigt till:" />
+            <TextField fx:id="dayField" layoutX="120.0" layoutY="229.0" prefHeight="25.0" prefWidth="33.0" promptText="D" />
+            <Label layoutX="156.0" layoutY="228.0" text="/">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="monthField" layoutX="168.0" layoutY="229.0" prefHeight="25.0" prefWidth="33.0" promptText="M" />
+            <Label layoutX="207.0" layoutY="228.0" text="/">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="yearField" layoutX="219.0" layoutY="229.0" prefHeight="25.0" prefWidth="49.0" promptText="År" />
          </children>
       </AnchorPane>
    </children>

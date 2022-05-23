@@ -42,6 +42,12 @@
     -fx-font-size: 36;
 }
 
+.navButtonTxtSmall{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-font-size: 22;
+}
+
+
 .firstTimeTxt{
     -fx-font-family: "Baskerville Old Face";
     -fx-font-size: 14;
@@ -58,6 +64,7 @@
 }
 
 .clickableText:hover{
+    -fx-cursor: HAND;
     -fx-text-fill: #c0c0c0;
     -fx-underline: true;
 }
@@ -68,5 +75,67 @@
     -fx-border-color: Black;
 }
 
+.accountText{
+    -fx-pref-height: 60;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+
+.orderText {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 18px;
+}
+
+.conclusionCheckBox {
+    -fx-font-style: Italic;
+    -fx-font-size: 16px;
+}
+
+.conclusionText {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 16px;
+}
+
+.conclusionTextSmall{
+    -fx-font-size: 15px;
+    -fx-font-family: Arial;
+}
+
+.greenPane{
+    -fx-background-color: rgb(11, 126, 11);
+    -fx-text-fill: white;
+}
+
+.bluePane{
+    -fx-background-color: rgb(0, 0, 220);
+    -fx-text-fill: black;
+}
+
+.redPane{
+    -fx-background-color: rgb(190, 0, 0);
+    -fx-text-fill: white;
+}
+
+.yellowPane{
+    -fx-background-color: #f8b613;
+    -fx-text-fill: black;
+}
+.brownPane{
+    -fx-background-color: chocolate;
+    -fx-text-fill: black;
+}
+
+.whitePane{
+    -fx-background-color: white;
+}
+
+.viewText{
+    -fx-text-fill: inherit;
+}
+
+.thickBorder{
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+}
 
 

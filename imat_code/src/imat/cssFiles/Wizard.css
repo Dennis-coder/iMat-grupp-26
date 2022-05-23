@@ -1,42 +1,40 @@
-.circleDone{
+.circleDone {
     -fx-fill: rgba(148, 148, 148, 0.75);
     -fx-border-size: 2px;
     -fx-border-color: black;
 }
 
-.circleNotDone{
+.circleNotDone {
     -fx-fill: rgba(255, 255, 255, 0.75);
     -fx-border-size: 2px;
     -fx-border-color: black;
 }
 
-.circleCurrent{
+.circleCurrent {
     -fx-fill: rgba(0, 0, 160, 0.75);
     -fx-border-size: 2px;
     -fx-border-color: blue;
 }
 
-.textCurrent{
+.textCurrent {
     -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-alignment: center;
 }
 
-.textCurrent:hover{
-    -fx-font-size: 22px;
-}
 
-.textNotCurrent{
+.textNotCurrent {
     -fx-text-fill: black;
     -fx-font-size: 20px;
     -fx-alignment: center;
 }
 
-.textNotCurrent:hover{
+.textNotCurrent:hover {
     -fx-font-size: 22px;
+    -fx-cursor: Hand;
 }
 
-.doneButton{
+.doneButton {
     -fx-background-radius: 40px;
     -fx-border-radius: 30px;
     -fx-border-color: #404040;
@@ -45,13 +43,99 @@
     -fx-background-color: #f0f0f0;
 }
 
-.labelTxt{
+.doneButton:hover {
+    -fx-cursor: Hand;
+    -fx-background-color: rgba(210, 210, 210, 0.5);
+}
+
+
+.labelTxt {
     -fx-font-family: Cambria;
-    -fx-font-size: 22 px;
+    -fx-font-size: 22px;
     -fx-text-alignment: right;
 }
 
-.labelPane{
+.labelPane {
     -fx-vgap: 40px;
+}
+
+.cross:hover {
+    -fx-font-size: 22px;
+    -fx-text-fill: rgba(150, 150, 150, 0.8);
+}
+
+.card:hover {
+    -fx-effect: dropshadow(gaussian, crimson, 30, 30, 0, 0);
+}
+
+.choiceLabelOn {
+    -fx-font-family: Cambria;
+    -fx-underline: true;
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+}
+
+.choiceLabelOff {
+    -fx-font-family: Cambria;
+    -fx-underline: false;
+    -fx-font-size: 22px;
+    -fx-text-fill: rgba(150, 150, 150, 0.8);
+}
+
+.switchButton {
+    -fx-background-radius: 60px;
+    -fx-border-radius: 45px;
+    -fx-border-color: #404040;
+    -fx-border-width: 1px;
+    -fx-background-color: #f0f0f0;
+}
+
+
+.orderNumber {
+    -fx-font-family: Cambria;
+    -fx-underline: false;
+    -fx-font-size: 22px;
+}
+
+
+.conclusionPane {
+    -fx-background-color: rgba(220, 220, 220, 0.8);
+    -fx-vgap: 30;
+}
+
+.conclusionPaneFrame {
+    -fx-background-color: rgba(220, 220, 220, 0.8);
+    -fx-border-width: 3px;
+    -fx-border-color: black;
+    -fx-vgap: 30;
+}
+
+.finButton {
+    -fx-background-color: rgba(220, 220, 220, 0.8);
+    -fx-background-radius: 40px;
+    -fx-border-radius: 30px;
+    -fx-border-color: black;
+    -fx-font-family: Bodoni MT;
+    -fx-font-size: 18px;
+    -fx-border-width: 2px;
+}
+
+.finButtonDark {
+    -fx-border-color: white;
+}
+
+.finButton:hover {
+    -fx-cursor: Hand;
+    -fx-background-color: navy;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-effect: dropshadow(one-pass-box, rgba(255, 255, 0, 0.75), 10, 10, 0, 0);
+}
+
+
+.finPaneFrame {
+    -fx-background-color: navy;
+    -fx-border-width: 4px;
+    -fx-border-color: gold;
 }
 

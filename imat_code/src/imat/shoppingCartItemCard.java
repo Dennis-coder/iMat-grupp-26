@@ -114,13 +114,12 @@ public class shoppingCartItemCard extends AnchorPane {
             if (SI.getProduct().equals(product)){
                 if(SI.getAmount() == 1){
                     removePrompt();
-                    break;
                 }
                 else{
                     SI.setAmount(SI.getAmount() - 1);
                     db.getShoppingCart().fireShoppingCartChanged(SI, true);
-                    break;
                 }
+                break;
             }
         }
     }

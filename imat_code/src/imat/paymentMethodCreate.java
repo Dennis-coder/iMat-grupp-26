@@ -5,10 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -26,7 +23,7 @@ public class paymentMethodCreate extends StackPane {
     @FXML
     TextField numberTextField;
     @FXML
-    ComboBox<String> bankCombo;
+    TextField cvvTextField;
     @FXML
     TextField nameTextField;
     @FXML
@@ -43,6 +40,14 @@ public class paymentMethodCreate extends StackPane {
     FlowPane paymentMethodPane;
     @FXML
     Label noTypeLabel;
+    @FXML
+    TextArea errorCreate;
+    @FXML
+    TextField dayField;
+    @FXML
+    TextField monthField;
+    @FXML
+    TextField yearField;
 
     List<paymentMethod> paymentMethods = new ArrayList<paymentMethod>();
 
@@ -71,33 +76,36 @@ public class paymentMethodCreate extends StackPane {
 
     @FXML
     private void addButtonPressed() {
-        if (!typeComboTwo.getValue().equals("") && !numberTextField.getText().equals("") && !nameTextField.getText().equals("") && !bankCombo.getValue().equals("")) {
+        if (!numberTextField.getText().equals("") && !nameTextField.getText().equals("") && (cvvTextField.getText().length() == 3)
+        && !dayField.getText().equals("") && !monthField.getText().equals("") && !yearField.getText().equals("")) {
             paymentMethodPane.getChildren().clear();
             paymentMethods.add(new paymentMethod(typeComboTwo.getValue(), nameTextField.getText(),
-                    bankCombo.getValue(), numberTextField.getText(), this));
+                    cvvTextField.getText(), numberTextField.getText(), dayField.getText(), monthField.getText(),
+                    yearField.getText(),this));
             for (paymentMethod pm : paymentMethods) {
                 paymentMethodPane.getChildren().add(pm);
             }
+            cvvTextField.setText("");
+            nameTextField.setText("");
+            numberTextField.setText("");
             paymentMethodPane.getChildren().add(createButton);
             paymentMethodPane.getChildren().add(typeComboOne);
             displayScreen.toFront();
+        } else {
+            errorCreate.setVisible(true);
+            iMatController.delay(3000, () -> errorCreate.setVisible(false));
         }
     }
 
 
     private void initializeComboBox() {
-        typeComboOne.getItems().addAll("Visa", "MasterCard", "Swish");
-        typeComboTwo.getItems().addAll("Visa", "MasterCard", "Swish");
-        bankCombo.getItems().addAll("Swedbank", "Nordea", "Avanza", "Annan");
+        typeComboOne.getItems().addAll("Visa", "MasterCard", "Annan");
+        typeComboTwo.getItems().addAll("Visa", "MasterCard", "Annan");
     }
 
     @FXML
     public void createButtonPressed() {
-        if (typeComboOne.getValue() == "Visa" || typeComboOne.getValue() == "MasterCard") {
-            numberLabel.setText("Nummer:");
-        } else if (typeComboOne.getValue() == "Swish") {
-            numberLabel.setText("ID:");
-        }
+        numberLabel.setText("Nummer:");
         if (typeComboOne.getValue() == null) {
             noTypeLabel.setVisible(true);
             iMatController.delay(2000, () -> noTypeLabel.setVisible(false));
@@ -116,8 +124,8 @@ public class paymentMethodCreate extends StackPane {
     }
 
     @FXML
-    public void cancelCreate(){
-        bankCombo.setValue("");
+    public void cancelCreate() {
+        cvvTextField.setText("");
         numberLabel.setText("");
         displayScreen.toFront();
     }

@@ -20,7 +20,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="bank" layoutX="130.0" layoutY="36.0" styleClass="createTxt" text="Bank" />
+      <Label fx:id="cvv" layoutX="130.0" layoutY="36.0" onMouseEntered="#cvvHover" onMouseExited="#cvvHoverStopped" styleClass="createTxt" text="CVV" />
       <Label fx:id="number" layoutX="130.0" layoutY="67.0" text="Number">
          <font>
             <Font name="Arial Italic" size="14.0" />

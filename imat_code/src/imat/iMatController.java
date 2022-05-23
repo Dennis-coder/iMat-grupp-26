@@ -11,9 +11,8 @@ import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +22,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import se.chalmers.cse.dat216.project.*;
+
+import javax.swing.*;
 
 
 public class iMatController implements Initializable {
@@ -92,7 +93,7 @@ public class iMatController implements Initializable {
     @FXML
     Label searchScreenLabel;
     @FXML
-    AnchorPane firstTimeScreen;
+    AnchorPane createAccountScreen;
     @FXML
     Label skipLabel;
     @FXML
@@ -116,12 +117,11 @@ public class iMatController implements Initializable {
     @FXML
     Pane menuPane;
     @FXML
-    Pane createdSuccessfully;
+    AnchorPane createdSuccessfully;
     @FXML
     Label editLabel;
     @FXML
     Label nameLabel;
-
     @FXML
     ImageView profilePicOne;
     @FXML
@@ -149,20 +149,27 @@ public class iMatController implements Initializable {
     @FXML
     FlowPane paymentPane;
     @FXML
+    StackPane orderPane;
+    @FXML
     FlowPane wizardHolder;
+    @FXML
+    FlowPane userTextFlow;
+    @FXML
+    ComboBox orderCombo;
+
+    Wizard wizard;
 
     paymentMethodCreate PMC = new paymentMethodCreate(this);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        db.reset();
+
         for (Product product : db.getProducts()) {
             productDisplayItem dispItem = new productDisplayItem(product, this);
             productDisplayMap.put(product.getProductId(), dispItem);
             shoppingCartItemCard SCI = new shoppingCartItemCard(product, this);
             shoppingItemsMap.put(product.getProductId(), SCI);
         }
-
         //populateProductScreen();
         db.getShoppingCart().addShoppingCartListener(scl);
         if (db.getShoppingCart().getItems().size() != 0) {
@@ -172,16 +179,31 @@ public class iMatController implements Initializable {
 
     @FXML
     public void toAccount() {
-        if (paymentPane.getChildren().isEmpty()){
+        if (db.isCustomerComplete()) {
+            notLoggedIn.toBack();
+            nameLabel.setText("Inloggad som: " + db.getCustomer().getFirstName() + " " + db.getCustomer().getLastName());
+        } else {
+            notLoggedIn.toFront();
+        }
+        if (paymentPane.getChildren().isEmpty()) {
             paymentPane.getChildren().add(PMC);
         }
+
         PMC.displayScreen.toFront();
+        updateOrderPane();
         updateAccountText();
         accountDetail.toFront();
-        if (!db.isCustomerComplete()) {
-            notLoggedIn.toFront();
-        } else {
-            notLoggedIn.toBack();
+    }
+
+    /*private void initOrderCombo() {
+        orderCombo.addLis
+    }*/
+
+
+    private void updateOrderPane() {
+        orderPane.getChildren().clear();
+        for (Order order : db.getOrders()) {
+            orderPane.getChildren().add(new OrderListItem(order));
         }
     }
 
@@ -196,8 +218,7 @@ public class iMatController implements Initializable {
 
     @FXML
     public void toCreate() {
-        firstTimeScreen.toFront();
-        firstTimePane.toBack();
+        createAccountScreen.toFront();
     }
 
     @FXML
@@ -336,6 +357,7 @@ public class iMatController implements Initializable {
 
     }
 
+
     @FXML
     public void mouseTrap(Event event) {
         event.consume();
@@ -372,11 +394,13 @@ public class iMatController implements Initializable {
     }
 
     public void removeItemFromCart(Product p) {
+        ShoppingItem itemToRemove = null;
         for (ShoppingItem SI : db.getShoppingCart().getItems()) {
             if (SI.getProduct().equals(p)) {
-                db.getShoppingCart().removeItem(SI);
+                itemToRemove = SI;
             }
         }
+        db.getShoppingCart().removeItem(itemToRemove);
     }
 
     @FXML
@@ -480,11 +504,11 @@ public class iMatController implements Initializable {
         stopFill(drinksButton, drinksLabel);
     }
 
-    private void setFillFromString(String s){
-        switch (s){
+    private void setFillFromString(String s) {
+        switch (s) {
             case "Frukt & Grönt":
-               fillBackground(fruitButton, fruitLabel);
-               break;
+                fillBackground(fruitButton, fruitLabel);
+                break;
             case "Mejeri":
                 fillBackground(dairyButton, dairyLabel);
                 break;
@@ -501,21 +525,67 @@ public class iMatController implements Initializable {
         }
     }
 
+    public void colorCategory(Node node, Product product) {
+        switch (categoryHandler.getInstance().mainToString(product)) {
+            case "Frukt & Grönt" -> node.getStyleClass().add("greenPane");
+            case "Mejeri" -> node.getStyleClass().add("yellowPane");
+            case "Kött & Fisk" -> node.getStyleClass().add("bluePane");
+            case "Skafferi" -> node.getStyleClass().add("brownPane");
+            case "Dryck" -> node.getStyleClass().add("redPane");
+        }
+    }
+
+    private void addSeparation(List<Product> products, Product product, boolean add) {
+        if (!(products.indexOf(product) == (products.size() - 1))) {
+            if (!categories.subToString(products.get(products.indexOf(product) + 1)).equals(categories.subToString(product)) || add) {
+                Label subLabel = new Label("  " + categories.subToString(products.get(products.indexOf(product) + 1)));
+                subLabel.getStyleClass().add("navButtonTxt");
+                subLabel.setPrefWidth(1200);
+                subLabel.setPrefHeight(45);
+                colorCategory(subLabel, product);
+                hitsFlowPane.getChildren().add(subLabel);
+
+            }
+        }
+    }
+
+    boolean dontClear = false;
 
     public void displayCategory(List<Product> products) {
-        clearHits();
-        clearFills();
+        if (!dontClear) {
+            clearHits();
+            clearFills();
+        }
         updateSearchScreenLabel(products);
-        delay(8, () -> breadCrumbPane.setLayoutX(searchScreenLabel.getLayoutBounds().getWidth() + 10));
+        searchScreenLabel.setText("");
+        breadCrumbPane.setLayoutX(14);
+        if (products.equals(db.getProducts())) {
+            displayAll();
+            return;
+        }
+        addSeparation(products, products.get(1), true);
         for (Product product : products) {
             hitsFlowPane.getChildren().add(productDisplayMap.get(product.getProductId()));
+            addSeparation(products, product, false);
         }
-        if(products.size() < 100){
+        if (products.size() < 100) {
             setFillFromString(categories.mainToString(products.get(0)));
         }
         home.toFront();
 
         searchScreen.toFront();
+    }
+
+    private void displayAll() {
+        dontClear = true;
+        displayCatPantry();
+        displayCatMeat();
+        displayCatDrinks();
+        displayCatVeg();
+        displayCatDairy();
+        breadCrumbPane.getChildren().clear();
+        breadCrumbPane.getChildren().add(new BreadCrumb("Alla produkter", true, this));
+        dontClear = false;
     }
 
     private void clearHits() {
@@ -633,7 +703,7 @@ public class iMatController implements Initializable {
 
     @FXML
     private void skipClick() {
-        firstTimeScreen.toBack();
+        createAccountScreen.toBack();
     }
 
     @FXML
@@ -669,25 +739,15 @@ public class iMatController implements Initializable {
 
     private void setTextFieldSwitch(String id, String text) {
         switch (id) {
-            case "firstName":
-                db.getCustomer().setFirstName(text);
-                break;
-            case "lastName":
-                db.getCustomer().setLastName(text);
-                break;
-            case "address":
+            case "firstName" -> db.getCustomer().setFirstName(text);
+            case "lastName" -> db.getCustomer().setLastName(text);
+            case "address" -> {
                 db.getCustomer().setPostAddress(text);
                 db.getCustomer().setAddress(text);
-                break;
-            case "postCode":
-                db.getCustomer().setPostCode(text);
-                break;
-            case "phoneNumber":
-                db.getCustomer().setPhoneNumber(text);
-                break;
-            case "email":
-                db.getCustomer().setEmail(text);
-                break;
+            }
+            case "postCode" -> db.getCustomer().setPostCode(text);
+            case "phoneNumber" -> db.getCustomer().setPhoneNumber(text);
+            case "email" -> db.getCustomer().setEmail(text);
         }
     }
 
@@ -695,11 +755,12 @@ public class iMatController implements Initializable {
     private void createAccountPressed() {
         createAccount();
         if (db.isCustomerComplete()) {
-            firstTimeScreen.toBack();
-            menuPane.toFront();
+            createAccountScreen.toBack();
+            notLoggedIn.toBack();
             updateAccountText();
-            createdSuccessfully.setVisible(true);
             createdSuccessfully.toFront();
+            createdSuccessfully.setVisible(true);
+
             delay(4000, () -> createdSuccessfully.setVisible(false));
             createdSuccessfully.toBack();
         } else {
@@ -709,13 +770,32 @@ public class iMatController implements Initializable {
     }
 
     private void updateAccountText() {
-        userTextLabel.setText(db.getCustomer().getFirstName() + "\n\n" +
-                db.getCustomer().getLastName() + "\n\n" + db.getCustomer().getAddress() + "\n\n" +
-                db.getCustomer().getPhoneNumber() + "\n\n"
-                + db.getCustomer().getEmail() + "\n\n" + db.getCustomer().getPostCode() + "\n\n");
-
-        nameLabel.setText(db.getCustomer().getFirstName() + " " + db.getCustomer().getLastName());
+        userTextFlow.getChildren().clear();
+        updateUserAccountText(db.getCustomer().getFirstName());
+        updateUserAccountText(db.getCustomer().getLastName());
+        updateUserAccountText(db.getCustomer().getPhoneNumber());
+        updateUserAccountText(db.getCustomer().getAddress());
+        updateUserAccountText(db.getCustomer().getEmail());
+        updateUserAccountText(db.getCustomer().getPostCode());
     }
+
+    @FXML
+    public void logOut() {
+        db.getCustomer().setFirstName("");
+        db.getCustomer().setLastName("");
+        db.getCustomer().setPhoneNumber("");
+        db.getCustomer().setAddress("");
+        db.getCustomer().setEmail("");
+        db.getCustomer().setPostCode("");
+    }
+
+    private void updateUserAccountText(String string) {
+        Label label = new Label();
+        label.setText(string);
+        label.getStyleClass().add("accountText");
+        userTextFlow.getChildren().add(label);
+    }
+
 
     @FXML
     AnchorPane profilePicPane;
@@ -731,6 +811,12 @@ public class iMatController implements Initializable {
     }
 
     @FXML
+    public void pickOwl1() {
+        pickOwl();
+        closeProfilePicPane1();
+    }
+
+    @FXML
     public void pickMonkey() {
         Image monkey = new Image("/imat/resources/imgs/monkey.png");
         profilePicOne.setImage(monkey);
@@ -739,11 +825,23 @@ public class iMatController implements Initializable {
     }
 
     @FXML
+    public void pickMonkey1() {
+        pickMonkey();
+        closeProfilePicPane1();
+    }
+
+    @FXML
     public void pickPenguin() {
         Image penguin = new Image("/imat/resources/imgs/penguin.png");
         profilePicOne.setImage(penguin);
         profilePicTwo.setImage(penguin);
         profilePicThree.setImage(penguin);
+    }
+
+    @FXML
+    public void pickPenguin1() {
+        pickPenguin();
+        closeProfilePicPane1();
     }
 
     @FXML
@@ -835,10 +933,23 @@ public class iMatController implements Initializable {
         return "";
     }
 
-    public void toWizard() {
-        wizardHolder.getChildren().add( Wizard.getInstance());
-        wizardHolder.toFront();
+    @FXML
+    public void nextOrder() {
+        int thisIndex = db.getOrders().size() - 1;
+        orderPane.getChildren().get(thisIndex).toBack();
+    }
 
+    @FXML
+    public void previousOrder() {
+        orderPane.getChildren().get(0).toFront();
+    }
+
+    public void toWizard() {
+        if (wizardHolder.getChildren().isEmpty()) {
+            this.wizard = new Wizard(this);
+            wizardHolder.getChildren().add(wizard);
+        }
+        wizardHolder.toFront();
     }
 }
 
