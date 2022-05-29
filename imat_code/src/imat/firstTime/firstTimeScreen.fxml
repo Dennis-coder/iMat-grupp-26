@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="400.0" style="-fx-background-color: navy;" styleClass="thickBorder" stylesheets="@../cssFiles/iMat.css" type="StackPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="introPaneTwo" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="94.0" layoutY="35.0" styleClass="firstTimeScreenTitle" text="Välkommen till iMat!" />
+            <Button layoutX="308.0" layoutY="14.0" mnemonicParsing="false" onAction="#toIntroLast" text="Nästa --&gt;" />
+            <ImageView fitHeight="133.0" fitWidth="180.1" layoutX="106.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/imgs/dispItem.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#toIntroOne" text="&lt;--Tillbaka" />
+            <Label layoutX="14.0" layoutY="174.0" prefHeight="71.0" prefWidth="351.0" style="-fx-background-color: white;" styleClass="firstTimeScreenText" text="Knappen köp lägger till en vara i din varukorg. Skriver du in ett antal först kan du lägga till flera varor samtidigt." textAlignment="CENTER" wrapText="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="introPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="94.0" layoutY="35.0" styleClass="firstTimeScreenTitle" text="Välkommen till iMat!" />
+            <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="163.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/imgs/logo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="43.0" layoutY="105.0" prefHeight="107.0" prefWidth="305.0" styleClass="firstTimeScreenText" text="Klicka på kategorierna här uppe för att bläddra mellan våra varor, eller på start för att komma hit igen när som helst!" textAlignment="CENTER" wrapText="true" />
+            <Button layoutX="308.0" layoutY="14.0" mnemonicParsing="false" onAction="#toIntroTwo" text="Nästa --&gt;" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="introPaneLast" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="94.0" layoutY="35.0" styleClass="firstTimeScreenTitle" text="Välkommen till iMat!" />
+            <Button layoutX="293.0" layoutY="14.0" mnemonicParsing="false" onAction="#stopIntro" text="Börja Handla!" />
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#toIntroTwo" text="&lt;--Tillbaka" />
+            <ImageView fitHeight="107.0" fitWidth="235.0" layoutX="82.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/imgs/cartScreen.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="10.0" layoutY="170.0" prefHeight="82.0" prefWidth="370.0" styleClass="firstTimeScreenText" text="I varukorgen kan du se vad du har samlat på dig och lägga till eller ta bort produkter. Är du nöjd, fortsätt till beställning genom att klicka på &quot;till kassa&quot;" textAlignment="CENTER" wrapText="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="firstTimePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="94.0" layoutY="35.0" styleClass="firstTimeScreenTitle" text="Välkommen till iMat!" />
+            <Label layoutX="99.0" layoutY="140.0" styleClass="firstTimeScreenText" text="Är det din första gång här?" />
+            <Button layoutX="227.0" layoutY="173.0" mnemonicParsing="false" onAction="#clickedYesFirst" prefHeight="29.0" prefWidth="65.0" styleClass="navButton" text="Ja">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="99.0" layoutY="173.0" mnemonicParsing="false" onAction="#clickedNoFirst" prefHeight="29.0" prefWidth="65.0" styleClass="navButton" text="Nej">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="163.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/imgs/logo.png" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="choseYesPane" layoutY="134.0" prefHeight="117.0" prefWidth="390.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Label layoutX="38.0" layoutY="14.0" styleClass="firstTimeScreenText" text="Får vi lov att visa hur du handlar på vår sida?" />
+                  <Button layoutX="223.0" layoutY="59.0" mnemonicParsing="false" onAction="#clickedYesShow" prefHeight="25.0" prefWidth="65.0" text="Ja, visa!" />
+                  <Button layoutX="107.0" layoutY="59.0" mnemonicParsing="false" onAction="#clickedNoShow" text="Nej, inte nu" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="itemsLeftPane" prefHeight="250.0" prefWidth="346.0" scaleShape="false" style="-fx-background-color: white;">
+         <children>
+            <AnchorPane layoutX="24.0" layoutY="25.0" prefHeight="200.0" prefWidth="305.0" style="-fx-background-color: navy;" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <children>
+                  <Label layoutX="34.0" layoutY="14.0" prefHeight="82.0" prefWidth="277.0" text="Du har varor kvar i korgen, vill du fortsätta din handling där du avslutade den förra gången?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="91.0" fitWidth="134.0" layoutX="14.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/imgs/shopping_cart.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="193.0" layoutY="128.0" mnemonicParsing="false" onAction="#clickedNoFirst" text="Ja, jag vill fortsätta!" />
+                  <Button layoutX="105.0" layoutY="128.0" mnemonicParsing="false" onAction="#clearCart" text="Nej, rensa" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="notFirstPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="163.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/imgs/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="95.0" layoutY="35.0" styleClass="firstTimeScreenTitle" text="Välkommen tillbaka!" />
+            <Button layoutX="96.0" layoutY="146.0" mnemonicParsing="false" onAction="#clickedYesShow" text="Se intro igen">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="212.0" layoutY="146.0" mnemonicParsing="false" onAction="#startShop" text="Börja handla">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Label layoutX="51.0" layoutY="175.0" prefHeight="65.0" prefWidth="289.0" text="Behöver du hjälp med någonting, eller har du några frågor? Tveka inte att kontakta oss på: fakeadress@mail" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</fx:root>
