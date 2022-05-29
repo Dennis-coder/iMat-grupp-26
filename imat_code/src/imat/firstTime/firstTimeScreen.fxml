@@ -14,7 +14,7 @@
          <children>
             <Label layoutX="94.0" layoutY="35.0" styleClass="firstTimeScreenTitle" text="Välkommen till iMat!" />
             <Button layoutX="308.0" layoutY="14.0" mnemonicParsing="false" onAction="#toIntroLast" text="Nästa --&gt;" />
-            <ImageView fitHeight="133.0" fitWidth="180.1" layoutX="106.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="133.0" fitWidth="180" layoutX="106.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/imgs/dispItem.png" />
                </image>
