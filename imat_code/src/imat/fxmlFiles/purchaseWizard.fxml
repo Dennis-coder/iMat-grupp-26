@@ -72,153 +72,6 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="stepThree" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
-         <children>
-            <AnchorPane fx:id="confirmPaymentPane" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
-               <children>
-                  <Pane layoutX="300.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" styleClass="finPaneFrame" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
-                     <children>
-                        <Button layoutX="216.0" layoutY="207.0" mnemonicParsing="false" onAction="#orderConfirmed" prefHeight="71.0" prefWidth="249.0" text="Bekräfta och Betala" textFill="WHITE">
-                           <styleClass>
-                              <String fx:value="finButton" />
-                              <String fx:value="finButtonDark" />
-                           </styleClass>
-                        </Button>
-                        <Label layoutX="176.0" layoutY="62.0" prefHeight="145.0" prefWidth="328.0" text="Är du säker på att du vill skicka denna beställning?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Button layoutX="628.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelPay">
-                           <graphic>
-                              <ImageView fitHeight="28.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/imgs/close.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="wizardBarThree" layoutX="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="613.0">
-               <effect>
-                  <Blend />
-               </effect>
-               <children>
-                  <Circle fill="DODGERBLUE" layoutX="98.0" layoutY="111.0" opacity="0.5" radius="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(170, 170, 170, 0.75);">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Circle>
-                  <Circle fill="WHITE" layoutX="193.0" layoutY="111.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(170, 170, 170, 0.75);" />
-                  <Circle fx:id="circleThreeThree" fill="WHITE" layoutX="283.0" layoutY="111.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" styleClass="circleCurrent">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color blue="1.0" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </Circle>
-                  <Line endX="0.333343505859375" endY="0.3333282470703125" layoutX="169.0" layoutY="111.0" startX="-47.0" />
-                  <Line endX="-59.999969482421875" layoutX="319.0" layoutY="112.0" startX="-101.0" />
-                  <Line endX="-61.0" layoutX="408.0" layoutY="112.0" startX="-100.0" />
-                  <Label layoutX="77.0" layoutY="86.0" onMouseClicked="#toStepOne" prefHeight="48.0" prefWidth="42.0" styleClass="textNotCurrent" text="1" />
-                  <Label layoutX="169.0" layoutY="86.0" onMouseClicked="#toScreenTwo" prefHeight="48.0" prefWidth="48.0" styleClass="textNotCurrent" text="2" />
-                  <Label layoutX="266.0" layoutY="95.0" prefHeight="30.0" prefWidth="34.0" styleClass="textCurrent" text="3" />
-                  <ImageView fitHeight="48.0" fitWidth="82.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/imgs/truck.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="60.0" fitWidth="59.0" layoutX="163.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/imgs/card.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="262.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/imgs/checklist.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="74.0" fitWidth="84.0" layoutX="365.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/imgs/trophy.png" />
-                     </image>
-                  </ImageView>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="348.0" layoutY="88.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" style="-fx-background-color: white;" styleClass="doneButton" text="Färdig!" textAlignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" layoutX="-80.0" layoutY="88.0" mnemonicParsing="false" onAction="#toScreenTwo" prefHeight="43.0" prefWidth="128.0" styleClass="doneButton" text="&lt;- Tillbaka" textAlignment="CENTER" />
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="650.0" prefWidth="200.0" style="-fx-background-color: navy;">
-               <children>
-                  <ImageView fitHeight="74.0" fitWidth="71.0" layoutX="119.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/imgs/logo.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="15.0" layoutY="47.0" prefHeight="329.0" prefWidth="170.0" text="Psst!               Kommer du plötsligt på att du har missat någonting? Oroa dig inte, du kan när som helst ta dig tillbaka till affären via den här sidan!" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Button layoutX="1.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="78.0" prefWidth="153.0" styleClass="top-left-logo" text="iMat" textFill="WHITE">
-                     <font>
-                        <Font name="Elephant" size="40.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" centerShape="false" layoutX="8.0" layoutY="352.0" mnemonicParsing="false" onAction="#toHomePage" prefHeight="48.0" prefWidth="184.0" styleClass="navButton" text=" TIllbaka till butiken">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Pane layoutX="8.0" layoutY="400.0" prefHeight="1.0" prefWidth="184.0" style="-fx-background-color: navy;" />
-               </children>
-            </AnchorPane>
-            <Pane layoutX="200.0" prefHeight="650.0" prefWidth="5.0" style="-fx-background-color: black;" />
-            <Label layoutX="372.0" layoutY="160.0" styleClass="navButtonTxt" text="Sammanställning" underline="true" />
-            <ScrollPane hbarPolicy="NEVER" layoutX="301.0" layoutY="202.0" prefHeight="377.0" prefWidth="391.0" styleClass="conclusionPaneFrame">
-               <content>
-                  <FlowPane fx:id="overviewPane" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="600.0" prefWidth="370.0" styleClass="conclusionPane" />
-               </content>
-            </ScrollPane>
-            <Button layoutX="301.0" layoutY="591.0" mnemonicParsing="false" onAction="#toStepOne" text="Ändra kontaktinformation">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <Button layoutX="520.0" layoutY="591.0" mnemonicParsing="false" onAction="#toScreenTwo" text="Ändra Betaluppgifter">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Label fx:id="totalLabelTwo" layoutX="738.0" layoutY="429.0" styleClass="navButtonTxt" text="Totalt:" />
-            <Label layoutX="738.0" layoutY="475.0" text="Varav leveranskostnad: 139kr">
-               <font>
-                  <Font name="System Italic" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="738.0" layoutY="174.0" lineSpacing="6.0" prefHeight="105.0" prefWidth="305.0" styleClass="orderNumber" text="Du är nästan där nu! Om allting ser rätt ut är du redo att" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Button fx:id="confirmAndPayButton" alignment="CENTER" layoutX="819.0" layoutY="279.0" mnemonicParsing="false" onAction="#payOrder" prefHeight="59.0" prefWidth="143.0" style="-fx-background-color: rgba(220, 220, 220, 0.8);" styleClass="finButton" text="Betala">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="stepOne" prefHeight="635.0" prefWidth="1280.0" style="-fx-background-color: white;">
          <children>
             <Pane layoutX="258.0" layoutY="156.0" prefHeight="463.0" prefWidth="419.0" styleClass="navButton">
@@ -574,7 +427,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="switchPane" layoutX="517.0" layoutY="213.0" prefHeight="30.0" prefWidth="60.0" />
+            <AnchorPane fx:id="switchPane" layoutX="514.0" layoutY="204.0" prefHeight="30.0" prefWidth="60.0" />
             <TextField fx:id="monthField" disable="true" layoutX="401.0" layoutY="461.0" prefHeight="32.0" prefWidth="30.0" promptText="M">
                <font>
                   <Font size="14.0" />
@@ -636,6 +489,153 @@
                   </Pane>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="stepThree" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+         <children>
+            <AnchorPane fx:id="confirmPaymentPane" prefHeight="650.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0.5);" visible="false">
+               <children>
+                  <Pane layoutX="300.0" layoutY="150.0" prefHeight="200.0" prefWidth="200.0" styleClass="finPaneFrame" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
+                     <children>
+                        <Button layoutX="216.0" layoutY="207.0" mnemonicParsing="false" onAction="#orderConfirmed" prefHeight="71.0" prefWidth="249.0" text="Bekräfta och Betala" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="finButton" />
+                              <String fx:value="finButtonDark" />
+                           </styleClass>
+                        </Button>
+                        <Label layoutX="176.0" layoutY="62.0" prefHeight="145.0" prefWidth="328.0" text="Är du säker på att du vill skicka denna beställning?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="628.0" layoutY="14.0" mnemonicParsing="false" onAction="#cancelPay">
+                           <graphic>
+                              <ImageView fitHeight="28.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/imgs/close.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="wizardBarThree" layoutX="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="151.0" prefWidth="613.0">
+               <effect>
+                  <Blend />
+               </effect>
+               <children>
+                  <Circle fill="DODGERBLUE" layoutX="98.0" layoutY="111.0" opacity="0.5" radius="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(170, 170, 170, 0.75);">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Circle>
+                  <Circle fill="WHITE" layoutX="193.0" layoutY="111.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(170, 170, 170, 0.75);" />
+                  <Circle fx:id="circleThreeThree" fill="WHITE" layoutX="283.0" layoutY="111.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" styleClass="circleCurrent">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color blue="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </Circle>
+                  <Line endX="0.333343505859375" endY="0.3333282470703125" layoutX="169.0" layoutY="111.0" startX="-47.0" />
+                  <Line endX="-59.999969482421875" layoutX="319.0" layoutY="112.0" startX="-101.0" />
+                  <Line endX="-61.0" layoutX="408.0" layoutY="112.0" startX="-100.0" />
+                  <Label layoutX="77.0" layoutY="86.0" onMouseClicked="#toStepOne" prefHeight="48.0" prefWidth="42.0" styleClass="textNotCurrent" text="1" />
+                  <Label layoutX="169.0" layoutY="86.0" onMouseClicked="#toScreenTwo" prefHeight="48.0" prefWidth="48.0" styleClass="textNotCurrent" text="2" />
+                  <Label layoutX="266.0" layoutY="95.0" prefHeight="30.0" prefWidth="34.0" styleClass="textCurrent" text="3" />
+                  <ImageView fitHeight="48.0" fitWidth="82.0" layoutX="62.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/imgs/truck.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="60.0" fitWidth="59.0" layoutX="163.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/imgs/card.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="262.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/imgs/checklist.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="74.0" fitWidth="84.0" layoutX="365.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/imgs/trophy.png" />
+                     </image>
+                  </ImageView>
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="348.0" layoutY="88.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="105.0" style="-fx-background-color: white;" styleClass="doneButton" text="Färdig!" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="-80.0" layoutY="88.0" mnemonicParsing="false" onAction="#toScreenTwo" prefHeight="43.0" prefWidth="128.0" styleClass="doneButton" text="&lt;- Tillbaka" textAlignment="CENTER" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="650.0" prefWidth="200.0" style="-fx-background-color: navy;">
+               <children>
+                  <ImageView fitHeight="74.0" fitWidth="71.0" layoutX="119.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/imgs/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="15.0" layoutY="47.0" prefHeight="329.0" prefWidth="170.0" text="Psst!               Kommer du plötsligt på att du har missat någonting? Oroa dig inte, du kan när som helst ta dig tillbaka till affären via den här sidan!" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="1.0" layoutY="25.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="78.0" prefWidth="153.0" styleClass="top-left-logo" text="iMat" textFill="WHITE">
+                     <font>
+                        <Font name="Elephant" size="40.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" centerShape="false" layoutX="8.0" layoutY="352.0" mnemonicParsing="false" onAction="#toHomePage" prefHeight="48.0" prefWidth="184.0" styleClass="navButton" text=" TIllbaka till butiken">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Pane layoutX="8.0" layoutY="400.0" prefHeight="1.0" prefWidth="184.0" style="-fx-background-color: navy;" />
+               </children>
+            </AnchorPane>
+            <Pane layoutX="200.0" prefHeight="650.0" prefWidth="5.0" style="-fx-background-color: black;" />
+            <Label layoutX="372.0" layoutY="160.0" styleClass="navButtonTxt" text="Sammanställning" underline="true" />
+            <ScrollPane hbarPolicy="NEVER" layoutX="301.0" layoutY="202.0" prefHeight="377.0" prefWidth="391.0" styleClass="conclusionPaneFrame">
+               <content>
+                  <FlowPane fx:id="overviewPane" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="600.0" prefWidth="370.0" styleClass="conclusionPane" />
+               </content>
+            </ScrollPane>
+            <Button layoutX="301.0" layoutY="591.0" mnemonicParsing="false" onAction="#toStepOne" text="Ändra kontaktinformation">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="520.0" layoutY="591.0" mnemonicParsing="false" onAction="#toScreenTwo" text="Ändra Betaluppgifter">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="totalLabelTwo" layoutX="738.0" layoutY="429.0" styleClass="navButtonTxt" text="Totalt:" />
+            <Label layoutX="738.0" layoutY="475.0" text="Varav leveranskostnad: 139kr">
+               <font>
+                  <Font name="System Italic" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="738.0" layoutY="174.0" lineSpacing="6.0" prefHeight="105.0" prefWidth="305.0" styleClass="orderNumber" text="Du är nästan där nu! Om allting ser rätt ut är du redo att" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="confirmAndPayButton" alignment="CENTER" layoutX="819.0" layoutY="279.0" mnemonicParsing="false" onAction="#payOrder" prefHeight="59.0" prefWidth="143.0" style="-fx-background-color: rgba(220, 220, 220, 0.8);" styleClass="finButton" text="Betala">
+               <font>
+                  <Font name="Bodoni MT" size="18.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

@@ -90,6 +90,10 @@
     -fx-background-color: #f0f0f0;
 }
 
+.switchButtonClick:hover{
+    -fx-cursor: HAND;
+}
+
 
 .orderNumber {
     -fx-font-family: Cambria;

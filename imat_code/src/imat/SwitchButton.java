@@ -28,6 +28,7 @@ public class SwitchButton extends AnchorPane
         switchBtn.setPrefWidth(30);
         switchBtn.setPrefHeight(30);
         switchBtn.getStyleClass().add("switchButton");
+        switchBtn.getStyleClass().add("switchButtonClick");
 
         switchBtn.setOnAction(new EventHandler<ActionEvent>()
         {

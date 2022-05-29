@@ -4,9 +4,12 @@ package imat;
 import java.net.URL;
 import java.util.*;
 
+import imat.firstTime.homeFirstScreen;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -73,7 +76,13 @@ public class iMatController implements Initializable {
     @FXML
     Label drinksLabel;
     Label[] navLabels = {fruitLabel, meatLabel, dairyLabel, pantryLabel, drinksLabel, startLabel};
+    @FXML
+    Pane introMenuPane;
 
+    @FXML
+    AnchorPane introShowingScreen;
+    @FXML
+    FlowPane firstTimeScreen;
     @FXML
     FlowPane favoriteScreen;
     @FXML
@@ -154,31 +163,48 @@ public class iMatController implements Initializable {
     FlowPane wizardHolder;
     @FXML
     FlowPane userTextFlow;
-    @FXML
-    ComboBox orderCombo;
 
     Wizard wizard;
 
     paymentMethodCreate PMC = new paymentMethodCreate(this);
+    @FXML
+    Pane introShop;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         for (Product product : db.getProducts()) {
             productDisplayItem dispItem = new productDisplayItem(product, this);
             productDisplayMap.put(product.getProductId(), dispItem);
             shoppingCartItemCard SCI = new shoppingCartItemCard(product, this);
             shoppingItemsMap.put(product.getProductId(), SCI);
         }
-        //populateProductScreen();
+        if (wizardHolder.getChildren().isEmpty()) {
+            this.wizard = new Wizard(this);
+            wizardHolder.getChildren().add(wizard);
+        }
+        homeFirstScreen HFS = new homeFirstScreen(this);
+        if (!db.isFirstRun()){
+            HFS.clickedNoFirst();
+        }
+        firstTimeScreen.getChildren().add(HFS);
+        populateFavourites();
         db.getShoppingCart().addShoppingCartListener(scl);
         if (db.getShoppingCart().getItems().size() != 0) {
             db.getShoppingCart().fireShoppingCartChanged(db.getShoppingCart().getItems().get(0), false);
+        }
+        home.toFront();
+    }
+
+    private void populateFavourites() {
+        favoriteScreen.getChildren().clear();
+        for (Product product : db.favorites()) {
+            favoriteScreen.getChildren().add(new productDisplayItem(product, this));
         }
     }
 
     @FXML
     public void toAccount() {
+        System.out.println(db.isCustomerComplete());
         if (db.isCustomerComplete()) {
             notLoggedIn.toBack();
             nameLabel.setText("Inloggad som: " + db.getCustomer().getFirstName() + " " + db.getCustomer().getLastName());
@@ -194,10 +220,6 @@ public class iMatController implements Initializable {
         updateAccountText();
         accountDetail.toFront();
     }
-
-    /*private void initOrderCombo() {
-        orderCombo.addLis
-    }*/
 
 
     private void updateOrderPane() {
@@ -332,13 +354,6 @@ public class iMatController implements Initializable {
         mouseExitedCategoryButton(drinksLabel);
     }
 
-    /* @FXML
-    public void populateProductScreen() {
-        for (Product p : db.favorites()) {
-            favoriteScreen.getChildren().add(productDisplayMap.get(p.getProductId()));
-        }
-    }*/
-
 
     public void openProductViewScreen(Product product, int currentVal) {
         productView productView = new productView(product, currentVal, this);
@@ -348,12 +363,14 @@ public class iMatController implements Initializable {
     }
 
     public void closeProductViewScreen() {
+        populateFavourites();
         if (shoppingCartHolder.getChildren().isEmpty()) {
             productViewHolder.getChildren().clear();
             productViewScreen.toBack();
         } else {
             shoppingCartScreen.getInstance(this).singltemAnchorPane.toBack();
         }
+
 
     }
 
@@ -380,6 +397,7 @@ public class iMatController implements Initializable {
             }
         }
     };
+
 
     @FXML
     public void addItemToCart(Product product, int currentVal) {
@@ -576,7 +594,8 @@ public class iMatController implements Initializable {
         searchScreen.toFront();
     }
 
-    private void displayAll() {
+    public void displayAll() {
+        hitsFlowPane.getChildren().clear();
         dontClear = true;
         displayCatPantry();
         displayCatMeat();
@@ -584,7 +603,8 @@ public class iMatController implements Initializable {
         displayCatVeg();
         displayCatDairy();
         breadCrumbPane.getChildren().clear();
-        breadCrumbPane.getChildren().add(new BreadCrumb("Alla produkter", true, this));
+
+        breadCrumbPane.getChildren().add(new BreadCrumb("Alla Produkter", true, this));
         dontClear = false;
     }
 
@@ -760,7 +780,6 @@ public class iMatController implements Initializable {
             updateAccountText();
             createdSuccessfully.toFront();
             createdSuccessfully.setVisible(true);
-
             delay(4000, () -> createdSuccessfully.setVisible(false));
             createdSuccessfully.toBack();
         } else {
@@ -787,6 +806,7 @@ public class iMatController implements Initializable {
         db.getCustomer().setAddress("");
         db.getCustomer().setEmail("");
         db.getCustomer().setPostCode("");
+        toHomepage();
     }
 
     private void updateUserAccountText(String string) {
@@ -950,6 +970,35 @@ public class iMatController implements Initializable {
             wizardHolder.getChildren().add(wizard);
         }
         wizardHolder.toFront();
+    }
+
+    public void showIntro() {
+        introShowingScreen.toFront();
+        introShowingScreen.setVisible(true);
+        introShowingScreen.getChildren().add(firstTimeScreen);
+        introMenuPane.setVisible(true);
+        firstTimeScreen.setLayoutX(14);
+        firstTimeScreen.setLayoutY(147);
+    }
+
+    public void showIntroOne() {
+        introMenuPane.setVisible(true);
+    }
+
+    public void showIntroTwo() {
+        introMenuPane.setVisible(false);
+        introShop.setVisible(false);
+    }
+
+    public void showIntroLast() {
+        introShop.setVisible(true);
+    }
+
+    public void stopIntro() {
+        startScreen.getChildren().add(firstTimeScreen);
+        firstTimeScreen.setLayoutY(7);
+        firstTimeScreen.setLayoutX(14);
+        introShowingScreen.setVisible(false);
     }
 }
 

@@ -138,4 +138,15 @@
     -fx-border-color: black;
 }
 
+.firstTimeScreenTitle{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-text-fill: Black;
+    -fx-font-size: 24px;
+}
+
+.firstTimeScreenText{
+    -fx-font-family: "Baskerville Old Face";
+    -fx-text-fill: Black;
+    -fx-font-size: 18px;
+}
 

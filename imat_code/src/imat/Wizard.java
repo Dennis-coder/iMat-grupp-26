@@ -186,7 +186,7 @@ public class Wizard extends StackPane {
         stepTwo.getChildren().add(switchButton);
 
         switchButton.setLayoutX(516);
-        switchButton.setLayoutY(234);
+        switchButton.setLayoutY(214);
     }
 
 
@@ -600,6 +600,7 @@ public class Wizard extends StackPane {
         Date date = new SimpleDateFormat("yyyy-MM-dd").parse(deliveryDate.toString());
         this.order = db.placeOrder(false);
         order.setDate(date);
+        db.getShoppingCart().clear();
         orderFinished.toFront();
         orderPane.getChildren().add(new OrderListItem(order));
     }
